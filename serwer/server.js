@@ -20,7 +20,8 @@ const ORIGINS = (process.env.ALLOWED_ORIGINS ||
   .split(',').map(s => s.trim()).filter(Boolean);
 
 const SUBJECTS = JSON.parse(
-  fs.readFileSync(path.join(__dirname, 'subjects.json'), 'utf8'));
+  fs.readFileSync(path.join(__dirname, 'subjects.json'), 'utf8')
+    .replace(/^\uFEFF/, ''));
 
 /* --- prosty limit: 40 zapytań / 5 min na IP --- */
 const hits = new Map();

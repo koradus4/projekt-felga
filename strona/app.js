@@ -1,4 +1,4 @@
-﻿/* ===== Projekt „Felga" — logika strony ===== */
+/* ===== Projekt „Felga" — logika strony ===== */
 
 /* ---------- pasek postępu ---------- */
 const bar = document.getElementById('progressBar');
