@@ -1,7 +1,4 @@
 /* ===== Projekt „Felga" — logika strony ===== */
-import * as THREE from 'three';
-import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-import { STLLoader } from 'three/addons/loaders/STLLoader.js';
 
 /* ---------- pasek postępu ---------- */
 const bar = document.getElementById('progressBar');
@@ -18,9 +15,18 @@ document.querySelectorAll('#sidebar a').forEach(a =>
   a.addEventListener('click', () => document.getElementById('sidebar').classList.remove('open')));
 
 /* ---------- 3D: felga do obracania ---------- */
-(function init3D() {
+(async function init3D() {
   const host = document.getElementById('viewer');
   if (!host) return;
+  let THREE, OrbitControls, STLLoader;
+  try {
+    THREE = await import('three');
+    ({ OrbitControls } = await import('three/addons/controls/OrbitControls.js'));
+    ({ STLLoader } = await import('three/addons/loaders/STLLoader.js'));
+  } catch (e) {
+    host.innerHTML = '<p style="padding:20px;color:#5c6570">Nie udało się wczytać biblioteki 3D.</p>';
+    return;
+  }
   let renderer;
   try {
     renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -72,7 +78,7 @@ document.querySelectorAll('#sidebar a').forEach(a =>
   function resize() {
     const w = host.clientWidth || 600;
     const h = host.clientHeight || 460;
-    renderer.setSize(w, h, false);
+    renderer.setSize(w, h);
     camera.aspect = w / h;
     camera.updateProjectionMatrix();
   }
