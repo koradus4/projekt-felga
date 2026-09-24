@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Projekt „Felga" — praca końcowa</title>
+<meta name="description" content="Interaktywna książka projektu: modelowanie, wykonanie i badania prototypu felgi aluminiowej do samochodu sportowego.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="progress"><span id="progressBar"></span></div>
+
+<header class="topbar">
+  <button id="menuBtn" aria-label="Menu">☰</button>
+  <span class="brand">Projekt&nbsp;„Felga"</span>
+  <span class="sub">praca końcowa · klasa 3 · branża samochodowa</span>
+</header>
+
+<div class="layout">
+  <aside id="sidebar">
+    <nav>
+      <a href="#okladka">Okładka</a>
+      <a href="#wstep">1 · Wstęp</a>
+      <a href="#teoria">2 · Teoria felg <b class="dot on"></b></a>
+      <a href="#projekt">3 · Projekt 3D <b class="dot on"></b></a>
+      <a href="#stanowisko">4 · Stanowisko testowe</a>
+      <a href="#bom">5 · Części i budżet <b class="dot on"></b></a>
+      <a href="#roadmapa">6 · Plan pracy</a>
+      <a href="#galeria">7 · Galeria</a>
+      <a href="#o-projekcie">8 · O projekcie</a>
+    </nav>
+  </aside>
+
+  <main>
+
+    <!-- ===== OKŁADKA ===== -->
+    <section id="okladka" class="hero">
+      <p class="eyebrow">Praca końcowa · rok szkolny 2025/2026</p>
+      <h1>Modelowanie, wykonanie i&nbsp;badania prototypu <em>felgi aluminiowej</em></h1>
+      <p class="lede">Projekt parametryczny CAD, wydruk 3D w&nbsp;skali 45% i&nbsp;stanowisko
+      testowe sterowane ESP32 — felga <b>17×7.5J 5×112 ET35</b> do samochodu sportowego.</p>
+      <dl class="meta">
+        <div><dt>Autor</dt><dd>Konrad Borkowski</dd></div>
+        <div><dt>Klasa</dt><dd>3 (branża samochodowa)</dd></div>
+        <div><dt>Opiekun</dt><dd>… (uzupełnić)</dd></div>
+        <div><dt>Szkoła</dt><dd>… (uzupełnić)</dd></div>
+      </dl>
+      <p class="hint">Przewiń niżej ↓ — rozdział 3 zawiera <b>model 3D do obracania w przeglądarce</b>.</p>
+    </section>
+
+    <!-- ===== WSTĘP ===== -->
+    <section id="wstep">
+      <h2>1 · Wstęp</h2>
+      <p><b>Cel pracy:</b> zaprojektować, wykonać i przebadać prototyp felgi aluminiowej
+      przeznaczonej do samochodu sportowego, a następnie zweryfikować geometrię i wyważenie
+      na własnym stanowisku pomiarowym.</p>
+      <p><b>Zakres:</b> projekt parametryczny felgi 17×7.5J (PCD 5×112, ET35, otwór centrujący
+      57,1 mm), analiza wytrzymałościowa w FreeCAD, wydruk prototypu w skali 45%, stanowisko
+      z napędem NEMA 17 sterowanym ESP32 oraz pomiary obrotów, drgań, bicia i prądu.</p>
+      <p><b>Uzasadnienie:</b> felga to element bezpieczeństwa i&nbsp;stylu — w&nbsp;autach
+      sportowych i&nbsp;luksusowych liczą się masa, sztywność i&nbsp;technologia produkcji.
+      Prototyp wykonany w&nbsp;druku 3D pozwala tanio sprawdzić geometrię, wyważenie i&nbsp;bicie
+      przed wykonaniem elementu z&nbsp;aluminium.</p>
+      <div class="note">Praca łączy cztery obszary: <b>CAD → technologię → druk 3D → mechatronikę
+      i pomiary</b>. Każdy rozdział kończy się konkretnym efektem (plik, wydruk, wykres).</div>
+    </section>
+
+    <!-- ===== TEORIA ===== -->
+    <section id="teoria">
+      <h2>2 · Teoria felg</h2>
+      <h3>Oznaczenia na feldze</h3>
+      <table class="tbl">
+        <thead><tr><th>Oznaczenie</th><th>Znaczenie</th><th>Nasza felga</th></tr></thead>
+        <tbody>
+          <tr><td><b>17×7.5J</b></td><td>średnica 17″ i szerokość 7,5 cala (rant typu J)</td><td>17×7.5J</td></tr>
+          <tr><td><b>PCD</b></td><td>liczba i rozstaw otworów śrub</td><td>5×112 mm</td></tr>
+          <tr><td><b>ET</b></td><td>odsadzenie: odległość płaszczyzny montażu od środka felgi</td><td>ET35</td></tr>
+          <tr><td><b>CB</b></td><td>otwór centrujący (pierścień prowadzący piasty)</td><td>Ø57,1 mm</td></tr>
+        </tbody>
+      </table>
+      <h3>Materiały</h3>
+      <p>Felgi aluminiowe wykonuje się głównie ze stopów <b>A356.0-T6</b> (odlewy) oraz
+      <b>6061-T6</b> (elementy kute). Liczy się stosunek wytrzymałości do masy oraz
+      przewodzenie ciepła od hamulców.</p>
+      <h3>Technologie produkcji</h3>
+      <table class="tbl">
+        <thead><tr><th>Technologia</th><th>Zalety</th><th>Wady</th></tr></thead>
+        <tbody>
+          <tr><td>Odlew niskociśnieniowy</td><td>tani, dowolne kształty</td><td>porowatość, większa masa</td></tr>
+          <tr><td>Kucie matrycowe</td><td>najmocniejsze, najlżejsze</td><td>drogi, ograniczone kształty</td></tr>
+          <tr><td>Flow forming</td><td>mocne, cienkie ścianki</td><td>koszt maszyn</td></tr>
+          <tr><td>CNC (frezowanie)</td><td>powtarzalność, detale</td><td>długi czas, koszt</td></tr>
+        </tbody>
+      </table>
+      <h3>Sprawdź się — quiz <span class="badge" id="quizScore">0/6</span></h3>
+      <div id="quiz" class="quiz"></div>
+    </section>
+
+    <!-- ===== PROJEKT ===== -->
+    <section id="projekt">
+      <h2>3 · Projekt 3D</h2>
+      <p>Model wykonany <b>parametrycznie w FreeCAD</b> — wszystkie wymiary pochodzą z arkusza
+      „Parametry", więc zmiana wartości przebudowuje felgę.</p>
+      <div class="prow">
+        <div class="viewer-wrap">
+          <div id="viewer"></div>
+          <div class="viewer-ui">
+            <button id="btnReset">Wyśrodkuj</button>
+            <button id="btnWire">Siatka</button>
+            <button id="btnSpin">Obrót: ON</button>
+            <span class="tip">przeciągnij = obrót · rolka = zoom</span>
+          </div>
+        </div>
+        <div class="params">
+          <h3>Dane techniczne</h3>
+          <table class="tbl small">
+            <tr><td>Średnica</td><td>17″ (431,8 mm)</td></tr>
+            <tr><td>Szerokość</td><td>7.5J (190,5 mm)</td></tr>
+            <tr><td>PCD / śruby</td><td>5×112, otwór Ø15</td></tr>
+            <tr><td>ET</td><td>35 mm</td></tr>
+            <tr><td>CB</td><td>Ø57,1 mm</td></tr>
+            <tr><td>Ramiona</td><td>7 (zaokrąglone R8)</td></tr>
+            <tr><td>Kieszenie śrub</td><td>Ø26×10 + gniazdo R14</td></tr>
+            <tr><td>Skala wydruku</td><td>45% → Ø204 mm</td></tr>
+          </table>
+          <h3>Pliki do druku</h3>
+          <p class="dl">
+            <a href="download/obrecz_druk45.stl" download>obręcz (czarna)</a>
+            <a href="download/srodek_druk45.stl" download>środek (szary)</a>
+            <a href="download/sruba_druk45.stl" download>śruba M14</a>
+            <a href="download/nasadka_druk45.stl" download>nasadka 17</a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== STANOWISKO ===== -->
+    <section id="stanowisko">
+      <h2>4 · Stanowisko testowe</h2>
+      <p>Cel: zamocować prototyp felgi i&nbsp;wprawić go w&nbsp;ruch, mierząc parametry.
+      Napęd: <b>silnik krokowy NEMA 17</b> + sterownik <b>DRV8825/TMC2209</b>, sterowanie
+      <b>ESP32</b> (Wi-Fi + strona z regulacją), pomiar: obroty (Hall), drgania (MPU6050),
+      bicie, prąd (INA219).</p>
+      <div class="flow">
+        <span>ESP32</span><i>→</i><span>sterownik</span><i>→</i><span>NEMA 17</span><i>→</i>
+        <span>pasek GT2</span><i>→</i><span>wał Ø8 + łożyska 608</span><i>→</i><span>tarcza + felga</span>
+        <i>↺</i><span>czujniki → log CSV</span>
+      </div>
+      <p>Mechanika: tarcza montażowa dopasowana do felgi (prowadzenie Ø25,7; 5 otworów PCD 50,4
+      w skali 45%), wał Ø8, dwa łożyska 608, podstawa z mocowaniem silnika i naciągiem paska.</p>
+      <p class="hint">Lista zakupów i budżet → <a href="#bom">rozdział 5</a>.</p>
+    </section>
+
+    <!-- ===== BOM ===== -->
+    <section id="bom">
+      <h2>5 · Części i budżet</h2>
+      <p>Odznacz to, co <b>już masz</b> — kalkulator policzy, ile zostaje do kupienia.</p>
+      <div id="bomTable"></div>
+      <div class="sum"><span>Do kupienia:</span><b id="bomSum">—</b></div>
+      <p class="hint">Ceny orientacyjne (rynek PL, 2026). Filament liczony jak 1 kg PETG.</p>
+    </section>
+
+    <!-- ===== ROADMAPA ===== -->
+    <section id="roadmapa">
+      <h2>6 · Plan pracy</h2>
+      <ol id="roadmap" class="road"></ol>
+    </section>
+
+    <!-- ===== GALERIA ===== -->
+    <section id="galeria">
+      <h2>7 · Galeria</h2>
+      <div class="gal">
+        <figure><img src="img/profil.png" alt="Profil felgi"><figcaption>Profil — 7 ramion, wpuszczane śruby</figcaption></figure>
+        <figure><img src="img/3d.png" alt="Felga 3D"><figcaption>Widok 3D — obręcz czarna, środek szary</figcaption></figure>
+        <figure><img src="img/scena.png" alt="Scena"><figcaption>Scena — felga + śruba + klucz</figcaption></figure>
+        <figure><img src="img/sruba.png" alt="Śruba i nasadka"><figcaption>Śruba M14 i nasadka 17 mm</figcaption></figure>
+      </div>
+    </section>
+
+    <!-- ===== O PROJEKCIE ===== -->
+    <section id="o-projekcie">
+      <h2>8 · O projekcie</h2>
+      <p><b>Narzędzia:</b> FreeCAD 1.0 (model + FEM), OrcaSlicer (druk), Blender (rendery),
+      KiCad (płytka), ESP32 + Arduino (firmware), Git/GitHub (wersje), Render (hosting).</p>
+      <p><b>Wsparcie AI:</b> model i&nbsp;firmware powstały przy wsparciu asystenta AI
+      (opencode + modele DeepSeek/Ollama) — opisane w&nbsp;załączniku jako narzędzie inżynierskie.</p>
+      <p class="hint">Repozytorium: GitHub · hosting: Render. Strona jest rozwijana razem z&nbsp;pracą.</p>
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  <span>© 2026 Konrad Borkowski · projekt szkolny</span>
+  <span>FreeCAD · OrcaSlicer · Blender · ESP32</span>
+</footer>
+
+<div id="lightbox" class="lightbox" hidden><img alt=""><span class="close">×</span></div>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+<script type="module" src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: projekt-felga
+    runtime: static
+    buildCommand: ""
+    staticPublishPath: ./strona
+    autoDeploy: true
