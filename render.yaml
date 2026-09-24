@@ -5,3 +5,19 @@ services:
     buildCommand: ""
     staticPublishPath: ./strona
     autoDeploy: true
+
+  - type: web
+    name: stacja-nauki-api
+    runtime: node
+    plan: free
+    rootDir: serwer
+    buildCommand: ""
+    startCommand: node server.js
+    autoDeploy: true
+    envVars:
+      - key: DEEPSEEK_API_KEY
+        sync: false
+      - key: DEEPSEEK_MODEL
+        value: deepseek-flash
+      - key: ALLOWED_ORIGINS
+        value: https://projekt-felga.onrender.com,http://localhost:8000

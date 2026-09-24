@@ -1,0 +1,54 @@
+﻿{
+  "matematyka": {
+    "name": "Matematyka",
+    "icon": "🔢",
+    "desc": "Od liczb do funkcji — prosto i po kolei",
+    "hint": "Tłumacz jak dziecku. Zaczynaj od konkretu: pieniądze, litry, kilometry, obroty silnika. Unikaj abstrakcji bez przykładu.",
+    "levels": [
+      "Liczby całkowite, ułamki zwykłe i dziesiętne, procenty",
+      "Potęgi, pierwiastki, jednostki i zamiana jednostek",
+      "Równania (proste), przekształcanie wzorów (np. V = s / t)",
+      "Geometria: pola, obwody, koła, kąty",
+      "Trygonometria i obliczenia warsztatowe (skala, tolerancje, obroty)"
+    ]
+  },
+  "fizyka": {
+    "name": "Fizyka",
+    "icon": "⚙️",
+    "desc": "Siły, ruch, energia — na przykładach z garażu",
+    "hint": "Każdy wzór poprzedź obrazkiem z życia: dźwignia, hamulec, sprzęgło, sprężyna, akumulator.",
+    "levels": [
+      "Czym jest siła, masa, ciężar — dźwignia i koło",
+      "Ruch: prędkość, droga, czas; przyspieszenie",
+      "Energia, praca, moc, tarcie (hamulce)",
+      "Ciśnienie, ciepło, rozszerzalność (opony, płyny)",
+      "Prąd i magnetyzm — od podstaw do cewki i indukcji"
+    ]
+  },
+  "elektrotechnika": {
+    "name": "Elektrotechnika",
+    "icon": "⚡",
+    "desc": "Prąd, obwody, akumulator, czujniki — od zera",
+    "hint": "Używaj analogii wody w rurach: napięcie = ciśnienie, prąd = przepływ, opór = zwężenie. Potem przechodź na realne układy w aucie.",
+    "levels": [
+      "Prąd, napięcie, opór — prawo Ohma na przykładach",
+      "Obwody: szereg, równolegle, żarówka, bezpiecznik",
+      "Akumulator, alternator, rozrusznik",
+      "Czujniki i sygnały (temperatura, obroty, wał)",
+      "Elektronika: dioda, tranzystor, przekaźnik, mikrokontroler"
+    ]
+  },
+  "angielski": {
+    "name": "Angielski techniczny",
+    "icon": "🔤",
+    "desc": "Narzędzia, instrukcje, katalogi — słowa z warsztatu",
+    "hint": "Ucz tylko słownictwa technicznego używanego w instrukcjach i katalogach. Każde słowo: angielski → polski → przykład zdania z warsztatu → wymowa uproszczona.",
+    "levels": [
+      "Narzędzia i części: wrench, bolt, rim, tyre, bearing",
+      "Instrukcje: tighten, loosen, remove, replace, torque",
+      "Bezpieczeństwo: warning, danger, wear gloves, hot surface",
+      "Dane techniczne: size, weight, pressure, torque, tolerance",
+      "Dokumentacja i katalogi: spec sheet, warranty, spare part"
+    ]
+  }
+}

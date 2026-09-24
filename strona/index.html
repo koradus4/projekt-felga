@@ -29,6 +29,7 @@
       <a href="#roadmapa">6 · Plan pracy</a>
       <a href="#galeria">7 · Galeria</a>
       <a href="#o-projekcie">8 · O projekcie</a>
+      <a href="#nauka">9 · Stacja Nauki <b class="dot on"></b></a>
     </nav>
   </aside>
 
@@ -188,6 +189,45 @@
       <p class="hint">Repozytorium: GitHub · hosting: Render. Strona jest rozwijana razem z&nbsp;pracą.</p>
     </section>
 
+    <!-- ===== STACJA NAUKI ===== -->
+    <section id="nauka">
+      <h2>9 · Stacja Nauki <span class="badge" id="naukaStatus">łączę…</span></h2>
+      <p>Korepetytor AI dla przedmiotów ścisłych — tłumaczy <b>prosto, jak dziecku</b>, jedno pojęcie
+      naraz, z przykładami z warsztatu i pytaniem sprawdzającym po każdej porcji wiedzy.
+      Od podstaw do zaawansowanych, z odpytywaniem i wynikami.</p>
+
+      <div id="naukaTiles" class="tiles"></div>
+
+      <div id="naukaPanel" class="panel" hidden>
+        <div class="phead">
+          <b id="naukaTitle">—</b>
+          <label class="lvl">poziom
+            <select id="naukaLevel"></select>
+          </label>
+          <span class="modes">
+            <button id="modeLesson" class="on">📖 Lekcja</button>
+            <button id="modeQuiz">❓ Odpytanka</button>
+          </span>
+          <button id="naukaBack" class="ghost">← przedmioty</button>
+        </div>
+
+        <div id="naukaLog" class="chatlog"></div>
+
+        <div class="chatin">
+          <textarea id="naukaText" rows="2" placeholder="Napisz odpowiedź albo pytanie… (Enter = wyślij)"></textarea>
+          <button id="naukaSend">Wyślij</button>
+        </div>
+
+        <div class="quick">
+          <button data-q="Zacznij lekcję od początku tematu.">▶ Start tematu</button>
+          <button data-q="Wyjaśnij to jeszcze prościej, jak dziecku.">🔁 Prościej</button>
+          <button data-q="Odpytaj mnie teraz — zadaj pierwsze pytanie.">❓ Odpytaj mnie</button>
+          <button data-q="Podaj przykład z warsztatu samochodowego.">🔧 Przykład z warsztatu</button>
+          <button id="naukaClear" class="ghost">🗑 Wyczyść rozmowę</button>
+        </div>
+      </div>
+    </section>
+
   </main>
 </div>
 
@@ -198,6 +238,7 @@
 
 <div id="lightbox" class="lightbox" hidden><img alt=""><span class="close">×</span></div>
 
+<script src="config.js"></script>
 <script type="importmap">
 {
   "imports": {
@@ -206,6 +247,6 @@
   }
 }
 </script>
-<script type="module" src="app.js"></script>
+<script src="app.js"></script>
 </body>
 </html>

@@ -44,6 +44,23 @@ C:\Projekt_Felga\
 - [ ] Elektronika + firmware ESP32
 - [ ] Wydruk, montaż, badania i wnioski
 
+## Stacja Nauki (korepetytor AI) — jak uruchomić
+
+**Lokalnie** (dwa okna):
+```powershell
+cd C:\Projekt_Felga\serwer
+$env:DEEPSEEK_API_KEY = "sk-..."     # klucz z platform.deepseek.com
+node server.js                       # proxy na http://localhost:8787
+```
+drugie okno:
+```powershell
+cd C:\Projekt_Felga\strona
+python -m http.server 8000           # strona na http://localhost:8000
+```
+Test bez AI (podgląd interfejsu): `$env:MOCK_AI = "1"` przed uruchomieniem serwera.
+
+**Online:** usługa `stacja-nauki-api` na Renderze (klucz w Environment → `DEEPSEEK_API_KEY`).
+
 ## Jak otworzyć podgląd lokalnie
 
 W folderze `strona` uruchom serwer i wejdź na http://localhost:8000 :

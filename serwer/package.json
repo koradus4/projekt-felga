@@ -1,0 +1,12 @@
+{
+  "name": "stacja-nauki-api",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Proxy DeepSeek dla Stacji Nauki (projekt Felga)",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

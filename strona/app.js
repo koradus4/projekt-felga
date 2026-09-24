@@ -1,4 +1,4 @@
-/* ===== Projekt „Felga" — logika strony ===== */
+﻿/* ===== Projekt „Felga" — logika strony ===== */
 
 /* ---------- pasek postępu ---------- */
 const bar = document.getElementById('progressBar');
@@ -222,6 +222,164 @@ const ROAD = [
   if (!el) return;
   el.innerHTML = ROAD.map(([st, t, d]) =>
     '<li class="' + st + '"><b>' + t + '</b><small>' + d + '</small></li>').join('');
+})();
+
+/* ---------- STACJA NAUKI (korepetytor AI) ---------- */
+(function initNauka() {
+  const tilesEl = document.getElementById('naukaTiles');
+  const panel = document.getElementById('naukaPanel');
+  if (!tilesEl || !panel) return;
+
+  const API = (window.FELGA_API || '').replace(/\/$/, '');
+  const LS = 'felga_nauka_v1';
+  let store = {};
+  try { store = JSON.parse(localStorage.getItem(LS)) || {}; } catch (e) { store = {}; }
+  const save = () => { try { localStorage.setItem(LS, JSON.stringify(store)); } catch (e) {} };
+
+  let subs = [
+    { id: 'matematyka', name: 'Matematyka', icon: '🔢', desc: 'Od liczb do funkcji',
+      levels: ['Liczby, ułamki, procenty', 'Potęgi i jednostki', 'Równania i wzory', 'Geometria', 'Trygonometria i warsztat'] },
+    { id: 'fizyka', name: 'Fizyka', icon: '⚙️', desc: 'Siły, ruch, energia',
+      levels: ['Siła i masa', 'Ruch', 'Energia, moc, tarcie', 'Ciśnienie i ciepło', 'Prąd i magnetyzm'] },
+    { id: 'elektrotechnika', name: 'Elektrotechnika', icon: '⚡', desc: 'Prąd, obwody, czujniki',
+      levels: ['Prąd, napięcie, opór', 'Obwody i bezpieczniki', 'Akumulator i alternator', 'Czujniki', 'Elektronika i mikrokontroler'] },
+    { id: 'angielski', name: 'Angielski techniczny', icon: '🔤', desc: 'Słowa z warsztatu i katalogów',
+      levels: ['Narzędzia i części', 'Instrukcje', 'Bezpieczeństwo (BHP)', 'Dane techniczne', 'Katalogi i dokumentacja'] }
+  ];
+  let cur = null, mode = 'lesson';
+
+  const statusEl = document.getElementById('naukaStatus');
+  const logEl = document.getElementById('naukaLog');
+  const txtEl = document.getElementById('naukaText');
+  const sendBtn = document.getElementById('naukaSend');
+  const levelSel = document.getElementById('naukaLevel');
+
+  const setStatus = (t, cls) => { statusEl.textContent = t; statusEl.className = 'badge ' + (cls || ''); };
+  const data = id => { if (!store[id]) store[id] = { level: 0, log: [] }; return store[id]; };
+
+  function fmt(t) {
+    return String(t)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/\*\*(.+?)\*\*/g, '<b>$1</b>')
+      .replace(/\n/g, '<br>');
+  }
+  function addBubble(role, text) {
+    const d = document.createElement('div');
+    d.className = 'm ' + role;
+    d.innerHTML = fmt(text);
+    logEl.appendChild(d);
+    logEl.scrollTop = logEl.scrollHeight;
+    return d;
+  }
+  function renderLog() {
+    logEl.innerHTML = '';
+    const log = data(cur).log;
+    if (!log.length) {
+      addBubble('ai', 'Cześć! Jestem Twoim korepetytorem. 🤖\nWybierz poziom i kliknij **▶ Start tematu** — albo od razu pytaj.');
+    } else {
+      log.forEach(m => addBubble(m.role === 'user' ? 'user' : 'ai', m.text));
+    }
+  }
+
+  async function send(text) {
+    text = (text || '').trim();
+    if (!text || !cur) return;
+    const d = data(cur);
+    d.log.push({ role: 'user', text });
+    addBubble('user', text);
+    save();
+    txtEl.value = '';
+    sendBtn.disabled = true;
+    const wait = addBubble('ai', '…myślę…');
+    try {
+      const r = await fetch(API + '/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ subject: cur, mode: mode, level: d.level, messages: d.log })
+      });
+      const j = await r.json();
+      wait.remove();
+      const reply = j.reply || ('⚠️ ' + (j.error || 'Błąd AI'));
+      d.log.push({ role: 'ai', text: reply });
+      addBubble('ai', reply);
+      save();
+    } catch (e) {
+      wait.remove();
+      addBubble('ai', '⚠️ Nie mogę połączyć się z AI.\nLokalnie: uruchom serwer (`cd serwer` → `node server.js`).\nOnline: sprawdź usługę na Renderze (patrz START.md).');
+    }
+    sendBtn.disabled = false;
+  }
+
+  function renderTiles() {
+    tilesEl.innerHTML = '';
+    subs.forEach(s => {
+      const b = document.createElement('button');
+      b.className = 'tile';
+      b.innerHTML = '<span class="ic">' + (s.icon || '📘') + '</span><b>' + s.name +
+        '</b><small>' + (s.desc || '') + '</small>';
+      b.onclick = () => openSubject(s.id);
+      tilesEl.appendChild(b);
+    });
+  }
+
+  function openSubject(id) {
+    cur = id;
+    mode = 'lesson';
+    const s = subs.find(x => x.id === id) || { id: id, name: id, levels: [] };
+    document.getElementById('naukaTitle').textContent = (s.icon || '') + ' ' + s.name;
+    levelSel.innerHTML = '';
+    (s.levels || []).forEach((t, i) => {
+      const o = document.createElement('option');
+      o.value = String(i);
+      o.textContent = 'Poziom ' + i + ' — ' + t;
+      levelSel.appendChild(o);
+    });
+    levelSel.value = String(data(id).level || 0);
+    document.getElementById('modeLesson').classList.add('on');
+    document.getElementById('modeQuiz').classList.remove('on');
+    tilesEl.hidden = true;
+    panel.hidden = false;
+    renderLog();
+    txtEl.focus();
+  }
+
+  document.getElementById('naukaBack').onclick = () => { panel.hidden = true; tilesEl.hidden = false; };
+  document.getElementById('modeLesson').onclick = () => {
+    mode = 'lesson';
+    document.getElementById('modeLesson').classList.add('on');
+    document.getElementById('modeQuiz').classList.remove('on');
+  };
+  document.getElementById('modeQuiz').onclick = () => {
+    mode = 'quiz';
+    document.getElementById('modeQuiz').classList.add('on');
+    document.getElementById('modeLesson').classList.remove('on');
+  };
+  levelSel.onchange = () => { data(cur).level = parseInt(levelSel.value, 10) || 0; save(); };
+  sendBtn.onclick = () => send(txtEl.value);
+  txtEl.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(txtEl.value); }
+  });
+  document.getElementById('naukaClear').onclick = () => {
+    if (!cur) return;
+    data(cur).log = [];
+    save();
+    renderLog();
+  };
+  document.querySelectorAll('.quick button[data-q]').forEach(b => {
+    b.onclick = () => send(b.getAttribute('data-q'));
+  });
+
+  renderTiles();
+
+  fetch(API + '/api/subjects').then(r => r.json()).then(j => {
+    if (j.subjects && j.subjects.length) { subs = j.subjects; renderTiles(); }
+  }).catch(() => {});
+
+  fetch(API + '/api/health').then(r => r.json()).then(j => {
+    if (j.mock) setStatus('AI: tryb testowy', 'warn');
+    else if (j.hasKey) setStatus('AI: gotowe', 'ok');
+    else setStatus('AI: brak klucza', 'warn');
+  }).catch(() => setStatus('AI offline', 'bad'));
 })();
 
 /* ---------- lightbox ---------- */
