@@ -228,6 +228,7 @@
           <button data-q="Odpytaj mnie teraz — zadaj pierwsze pytanie.">❓ Odpytaj mnie</button>
           <button data-q="Podaj przykład z mojego życia: garaż, dom, droga do szkoły.">🔧 Przykład z mojego życia</button>
           <button id="naukaFotoQuick">📷 Zadanie ze zdjęcia</button>
+          <button id="naukaFiszki">🎴 Fiszki (0)</button>
           <button id="naukaClear" class="ghost">🗑 Wyczyść rozmowę</button>
         </div>
       </div>
@@ -242,6 +243,19 @@
 </footer>
 
 <div id="lightbox" class="lightbox" hidden><img alt=""><span class="close">×</span></div>
+
+<div id="fiszkiOverlay" class="fiszki" hidden>
+  <div class="fcard">
+    <small id="fiszkiLicznik">0/0</small>
+    <div class="fq" id="fiszkiPytanie">—</div>
+    <div class="fa" id="fiszkiOdpowiedz" hidden>—</div>
+    <div class="fbtns">
+      <button id="fiszkiPokaz">Pokaż odpowiedź</button>
+      <button id="fiszkiNastepna">Następna →</button>
+      <button id="fiszkiZamknij" class="ghost">Zamknij</button>
+    </div>
+  </div>
+</div>
 
 <script src="config.js"></script>
 <script type="importmap">

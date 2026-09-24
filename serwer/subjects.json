@@ -38,6 +38,58 @@
       "Elektronika: dioda, tranzystor, przekaźnik, mikrokontroler"
     ]
   },
+  "chemia": {
+    "name": "Chemia",
+    "icon": "🧪",
+    "desc": "Rdza, akumulator, paliwo, olej — chemia w aucie",
+    "hint": "Całą chemię pokazuj na tym, co Kamil widzi w garażu: rdza, kwas w akumulatorze, paliwo, olej, płyn chłodniczy, smar.",
+    "levels": [
+      "Atom, pierwiastek, mieszanina — z czego są rzeczy",
+      "Woda, powietrze, tlen — spalanie w silniku",
+      "Kwasy i zasady — akumulator, rdza (korozja)",
+      "Paliwa, oleje, smary — węglowodory",
+      "Metale i stopy — stal, aluminium, żeliwo (felgi!)"
+    ]
+  },
+  "materialoznawstwo": {
+    "name": "Materiałoznawstwo",
+    "icon": "🔩",
+    "desc": "Stal, aluminium, twardość — od śruby do felgi",
+    "hint": "Wszystko na częściach z garażu: śruba, felga, klocek hamulcowy, sprężyna, tarcza hamulcowa.",
+    "levels": [
+      "Metale w garażu: stal, aluminium, mosiądz",
+      "Żelazo i stal — twardość, rdza, obróbka",
+      "Aluminium i stopy — felgi, bloki silnika",
+      "Wytrzymałość i twardość — dlaczego śruba pęka",
+      "Obróbka: cięcie, wiercenie, szlifowanie, spawanie"
+    ]
+  },
+  "rysunek": {
+    "name": "Rysunek techniczny",
+    "icon": "📐",
+    "desc": "Rzuty, wymiary, tolerancje — czytać rysunek",
+    "hint": "Używaj prostych elementów z warsztatu: śruba, tarcza, felga, wspornik. Zawsze pokazuj, co oznacza dana linia lub liczba na rysunku.",
+    "levels": [
+      "Linie i rzuty (widok z przodu, z boku, z góry)",
+      "Wymiarowanie: długość, średnica, promień, otwór",
+      "Przekroje i szczegóły",
+      "Tolerancje i pasowania (dlaczego część nie wchodzi)",
+      "Rysunek felgi: PCD, ET, CB, otwory śrub"
+    ]
+  },
+  "miernictwo": {
+    "name": "Miernictwo",
+    "icon": "📏",
+    "desc": "Suwmiarka, mikrometr, błędy pomiaru",
+    "hint": "Ucz na prawdziwych pomiarach: średnica śruby, grubość klocka, luz, średnica felgi.",
+    "levels": [
+      "Jednostki i zamiana (mm, cm, cal)",
+      "Suwmiarka — jak mierzyć i czytać wynik",
+      "Mikrometr i szczelinomierz",
+      "Błędy pomiaru i dokładność",
+      "Pomiary w praktyce: bicie felgi, luz łożyska, średnica otworu"
+    ]
+  },
   "angielski": {
     "name": "Angielski techniczny",
     "icon": "🔤",
@@ -49,6 +101,19 @@
       "Bezpieczeństwo: warning, danger, wear gloves, hot surface",
       "Dane techniczne: size, weight, pressure, torque, tolerance",
       "Dokumentacja i katalogi: spec sheet, warranty, spare part"
+    ]
+  },
+  "chinski": {
+    "name": "Chiński techniczny",
+    "icon": "🀄",
+    "desc": "Karty części i aukcje — czytać po chińsku",
+    "hint": "Ucz tylko słów technicznych z aukcji i instrukcji. Każde słowo podawaj tak: znak + pinyin (uproszczona wymowa po polsku) + polskie znaczenie + przykład z aukcji części do auta.",
+    "levels": [
+      "Liczby i wymiary: 尺寸, 毫米, 厘米, 英寸",
+      "Części auta: 轮毂 (felga), 轮胎 (opona), 螺丝 (śruba), 轴承 (łożysko)",
+      "Materiały: 铝 (aluminium), 钢 (stal), 铁 (żelazo), 塑料 (plastik)",
+      "Narzędzia i instrukcje: 工具, 安装, 拆卸, 扭矩",
+      "Zamawianie: 数量 (ilość), 颜色 (kolor), 发货 (wysyłka), 尺寸表"
     ]
   }
 }

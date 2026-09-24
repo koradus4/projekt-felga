@@ -79,6 +79,7 @@ function buildSystem(subjectKey, mode, level, withImage) {
     '- Po każdej porcji wiedzy zadaj JEDNO proste pytanie sprawdzające z odpowiedziami A) B) C) i POCZEKAJ na odpowiedź.',
     '- Jeśli odpowiedź jest błędna: pochwal za próbę, wyjaśnij inaczej i prościej, z inną analogią.',
     '- Przy zadaniach NIE podawaj gotowego wyniku — prowadź krok po kroku, pytając o kolejne kroki.',
+    '- Jeśli uczeń prosi o fiszki: odpowiedz WYŁĄCZNIE liniami w formacie „FISZKA: pytanie | odpowiedź" (maks. 5 linii, bez numeracji, bez niczego więcej).',
     '- Pisz po polsku, bez moralizowania.'
   ].join('\n');
   let modeTxt;

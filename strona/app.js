@@ -243,8 +243,18 @@ const ROAD = [
       levels: ['Siła i masa', 'Ruch', 'Energia, moc, tarcie', 'Ciśnienie i ciepło', 'Prąd i magnetyzm'] },
     { id: 'elektrotechnika', name: 'Elektrotechnika', icon: '⚡', desc: 'Prąd, obwody, czujniki',
       levels: ['Prąd, napięcie, opór', 'Obwody i bezpieczniki', 'Akumulator i alternator', 'Czujniki', 'Elektronika i mikrokontroler'] },
+    { id: 'chemia', name: 'Chemia', icon: '🧪', desc: 'Rdza, akumulator, paliwo',
+      levels: ['Atom i mieszaniny', 'Spalanie', 'Kwasy i rdza', 'Paliwa i oleje', 'Metale i stopy'] },
+    { id: 'materialoznawstwo', name: 'Materiałoznawstwo', icon: '🔩', desc: 'Stal, aluminium, twardość',
+      levels: ['Metale w garażu', 'Żelazo i stal', 'Aluminium i felgi', 'Wytrzymałość', 'Obróbka'] },
+    { id: 'rysunek', name: 'Rysunek techniczny', icon: '📐', desc: 'Rzuty, wymiary, tolerancje',
+      levels: ['Linie i rzuty', 'Wymiarowanie', 'Przekroje', 'Tolerancje', 'Rysunek felgi'] },
+    { id: 'miernictwo', name: 'Miernictwo', icon: '📏', desc: 'Suwmiarka i pomiary',
+      levels: ['Jednostki', 'Suwmiarka', 'Mikrometr', 'Błędy pomiaru', 'Pomiary w praktyce'] },
     { id: 'angielski', name: 'Angielski techniczny', icon: '🔤', desc: 'Słowa z warsztatu i katalogów',
-      levels: ['Narzędzia i części', 'Instrukcje', 'Bezpieczeństwo (BHP)', 'Dane techniczne', 'Katalogi i dokumentacja'] }
+      levels: ['Narzędzia i części', 'Instrukcje', 'Bezpieczeństwo (BHP)', 'Dane techniczne', 'Katalogi i dokumentacja'] },
+    { id: 'chinski', name: 'Chiński techniczny', icon: '🀄', desc: 'Karty części i aukcje',
+      levels: ['Liczby i wymiary', 'Części auta', 'Materiały', 'Narzędzia', 'Zamawianie'] }
   ];
   let cur = null, mode = 'lesson';
 
@@ -328,6 +338,62 @@ const ROAD = [
     fr.readAsDataURL(f);
   };
 
+  /* --- fiszki z błędów --- */
+  const fiszkiAll = () => (store.fiszki = store.fiszki || []);
+  function updateFiszkiBtn() {
+    const b = document.getElementById('naukaFiszki');
+    if (b) b.textContent = '🎴 Fiszki (' + fiszkiAll().length + ')';
+  }
+  function parseFiszki(reply) {
+    const lines = String(reply).split('\n');
+    const inne = [];
+    let dodane = 0;
+    lines.forEach(l => {
+      const m = l.match(/^\s*(?:[-*•]\s*)?FISZKA\s*:\s*(.+?)\s*\|\s*(.+?)\s*$/i);
+      if (m) { fiszkiAll().push({ p: m[1], o: m[2] }); dodane++; }
+      else inne.push(l);
+    });
+    if (!dodane) return reply;
+    save();
+    updateFiszkiBtn();
+    const reszta = inne.join('\n').trim();
+    return (reszta ? reszta + '\n\n' : '') +
+      '🎴 Zapisano ' + dodane + ' fiszek (razem ' + fiszkiAll().length +
+      '). Kliknij „Fiszki", żeby je powtarzać.';
+  }
+
+  let fIdx = 0;
+  const fOv = document.getElementById('fiszkiOverlay');
+  function pokazFiszke() {
+    const arr = fiszkiAll();
+    if (!arr.length) return;
+    if (fIdx >= arr.length) fIdx = 0;
+    if (fIdx < 0) fIdx = arr.length - 1;
+    document.getElementById('fiszkiPytanie').textContent = arr[fIdx].p;
+    const o = document.getElementById('fiszkiOdpowiedz');
+    o.textContent = arr[fIdx].o;
+    o.hidden = true;
+    document.getElementById('fiszkiLicznik').textContent = (fIdx + 1) + '/' + arr.length;
+  }
+  const fBtn = document.getElementById('naukaFiszki');
+  if (fBtn) fBtn.onclick = () => {
+    if (!fiszkiAll().length) {
+      send('Zrób mi proszę 4 fiszki z tego, co ostatnio mylę. Format: FISZKA: pytanie | odpowiedź');
+      return;
+    }
+    fIdx = 0;
+    pokazFiszke();
+    fOv.hidden = false;
+  };
+  if (fOv) {
+    document.getElementById('fiszkiPokaz').onclick = () => {
+      document.getElementById('fiszkiOdpowiedz').hidden = false;
+    };
+    document.getElementById('fiszkiNastepna').onclick = () => { fIdx++; pokazFiszke(); };
+    document.getElementById('fiszkiZamknij').onclick = () => { fOv.hidden = true; };
+  }
+  updateFiszkiBtn();
+
   async function send(text) {
     text = (text || '').trim();
     if ((!text && !pending.length) || !cur) return;
@@ -356,7 +422,8 @@ const ROAD = [
       });
       const j = await r.json();
       wait.remove();
-      const reply = j.reply || ('⚠️ ' + (j.error || 'Błąd AI'));
+      let reply = j.reply || ('⚠️ ' + (j.error || 'Błąd AI'));
+      reply = parseFiszki(reply);
       d.log.push({ role: 'ai', text: reply });
       addBubble('ai', reply);
       save();
