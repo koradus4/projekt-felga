@@ -216,11 +216,14 @@
         <div id="naukaPreview" class="fotoprev" hidden></div>
 
         <div class="chatin">
-          <button id="naukaFotoBtn" class="fotobtn" title="Zdjęcie zadania z zeszytu">📷</button>
+          <button id="naukaFotoBtn" class="fotobtn" title="Zrób zdjęcie (aparat)">📷</button>
+          <button id="naukaGalBtn" class="fotobtn" title="Wybierz z galerii (do 3 zdjęć)">🖼</button>
           <input type="file" id="naukaFoto" accept="image/*" capture="environment" hidden>
+          <input type="file" id="naukaGal" accept="image/*" multiple hidden>
           <textarea id="naukaText" rows="2" placeholder="Napisz odpowiedź albo pytanie… (Enter = wyślij)"></textarea>
           <button id="naukaSend">Wyślij</button>
         </div>
+        <p class="hint" style="margin:8px 12px 0">📷 = aparat · 🖼 = galeria (do 3 zdjęć naraz). Zdjęcia nie są zapisywane na serwerze — służą tylko do jednej odpowiedzi.</p>
 
         <div class="quick">
           <button data-q="Zacznij lekcję od początku tematu.">▶ Start tematu</button>

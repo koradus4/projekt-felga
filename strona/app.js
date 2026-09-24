@@ -237,6 +237,8 @@ const ROAD = [
   const save = () => { try { localStorage.setItem(LS, JSON.stringify(store)); } catch (e) {} };
 
   let subs = [
+    { id: 'zadania', name: 'Zadania domowe', icon: '📚', desc: 'Zdjęcie z zeszytu → wytłumaczenie',
+      levels: ['Matematyka', 'Fizyka', 'Zawodowe', 'Chemia', 'Mieszane'] },
     { id: 'matematyka', name: 'Matematyka', icon: '🔢', desc: 'Od liczb do funkcji',
       levels: ['Liczby, ułamki, procenty', 'Potęgi i jednostki', 'Równania i wzory', 'Geometria', 'Trygonometria i warsztat'] },
     { id: 'fizyka', name: 'Fizyka', icon: '⚙️', desc: 'Siły, ruch, energia',
@@ -327,16 +329,22 @@ const ROAD = [
   function pickPhoto() { if (fotoInput) fotoInput.click(); }
   const fotoBtn = document.getElementById('naukaFotoBtn');
   const fotoQuick = document.getElementById('naukaFotoQuick');
+  const galBtn = document.getElementById('naukaGalBtn');
+  const galInput = document.getElementById('naukaGal');
   if (fotoBtn) fotoBtn.onclick = pickPhoto;
   if (fotoQuick) fotoQuick.onclick = pickPhoto;
-  if (fotoInput) fotoInput.onchange = () => {
-    const f = fotoInput.files && fotoInput.files[0];
-    fotoInput.value = '';
-    if (!f) return;
-    const fr = new FileReader();
-    fr.onload = () => downscale(fr.result, u => { pending.push(u); renderPrev(); });
-    fr.readAsDataURL(f);
-  };
+  if (galBtn) galBtn.onclick = () => { if (galInput) galInput.click(); };
+
+  function dodajPliki(fileList) {
+    const pliki = Array.prototype.slice.call(fileList || []).slice(0, 3 - pending.length);
+    pliki.forEach(f => {
+      const fr = new FileReader();
+      fr.onload = () => downscale(fr.result, u => { if (pending.length < 3) { pending.push(u); renderPrev(); } });
+      fr.readAsDataURL(f);
+    });
+  }
+  if (fotoInput) fotoInput.onchange = () => { dodajPliki(fotoInput.files); fotoInput.value = ''; };
+  if (galInput) galInput.onchange = () => { dodajPliki(galInput.files); galInput.value = ''; };
 
   /* --- fiszki z błędów --- */
   const fiszkiAll = () => (store.fiszki = store.fiszki || []);

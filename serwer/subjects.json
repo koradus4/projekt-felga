@@ -103,6 +103,19 @@
       "Dokumentacja i katalogi: spec sheet, warranty, spare part"
     ]
   },
+  "zadania": {
+    "name": "Zadania domowe",
+    "icon": "📚",
+    "desc": "Zdjęcie z zeszytu → wytłumaczenie krok po kroku",
+    "hint": "Uczeń przysyła zdjęcie zadania z zeszytu lub podręcznika (matematyka, fizyka, chemia, przedmioty zawodowe). Najpierw rozpoznaj, czego dotyczy zadanie, powiedz to, a potem prowadź krok po kroku pytając o kolejne kroki.",
+    "levels": [
+      "Zadania z matematyki (procenty, równania)",
+      "Zadania z fizyki (wzory, jednostki)",
+      "Zadania zawodowe (prąd, siły, materiały)",
+      "Zadania z chemii (reakcje, stężenia)",
+      "Wszystko mieszane — sam rozpoznaj temat"
+    ]
+  },
   "chinski": {
     "name": "Chiński techniczny",
     "icon": "🀄",
