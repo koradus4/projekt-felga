@@ -7,9 +7,14 @@ CosinusYoung 15+ · Szkoła Branżowa I stopnia, Częstochowa · opiekun: Konrad
 
 | Co | Adres |
 |---|---|
-| Strona (na żywo) | https://projekt-felga.onrender.com |
+| Książka projektu (praca końcowa) | https://projekt-felga.onrender.com |
+| **Stacja Nauki — tryb aplikacji (telefon)** | https://projekt-felga.onrender.com/nauka.html |
 | Repozytorium | https://github.com/koradus4/projekt-felga |
 | Panel Render | https://dashboard.render.com |
+
+**Na telefon:** zeskanuj kod QR ze strony (rozdz. 9) albo wpisz adres `projekt-felga.onrender.com/nauka.html`.
+Chrome → ⋮ → „Dodaj do ekranu głównego" → ikona jak aplikacja (dzięki `manifest.json` + `img/ikona-*.png`).
+Zdjęcia zadań: 📷 aparat · 🖼 galeria (do 3) · na komputerze przeciągnij myszką na okno czatu.
 
 ## Gdzie co jest (struktura folderu)
 
