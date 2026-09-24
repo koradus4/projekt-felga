@@ -15,6 +15,7 @@ _Ostatnia aktualizacja: 24.09.2026 · autor: Kamil Borkowski · opiekun: Konrad 
 - [ ] **Dziennik postępów**: liczba lekcji/fiszek, seria dni nauki 🔥, najsłabsze tematy
 - [ ] **Eksport do PDF/MD** (dowód do pracy końcowej: „AI jako narzędzie nauki — wyniki")
 - [ ] **Plan powtórek**: AI układa tygodniowy plan z błędów
+- [ ] **Rozmowa głosem (🎤 + 🔊)**: Web Speech API (słuchanie po polsku) + speechSynthesis (czytanie odpowiedzi); tryb hands-free. Działa w Chrome/Android — bez dodatkowych kosztów i usług
 
 ## ⏳ DO ZROBIENIA — dalsze
 - [ ] **Kafel „Praca końcowa"** — egzamin próbny z rozdziałów pracy
