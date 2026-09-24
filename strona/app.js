@@ -290,7 +290,7 @@ const ROAD = [
     save();
     txtEl.value = '';
     sendBtn.disabled = true;
-    const wait = addBubble('ai', '…myślę…');
+    const wait = addBubble('ai', '…myślę… (po dłuższej przerwie AI budzi się do ~30 s)');
     try {
       const r = await fetch(API + '/api/chat', {
         method: 'POST',
