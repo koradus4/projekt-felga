@@ -501,6 +501,20 @@ const ROAD = [
     b.onclick = () => send(b.getAttribute('data-q'));
   });
 
+  /* --- przeciągnij i upuść zdjęcie (komputer) --- */
+  ['dragenter', 'dragover'].forEach(ev => panel.addEventListener(ev, e => {
+    e.preventDefault();
+    panel.classList.add('drag');
+  }));
+  ['dragleave', 'drop'].forEach(ev => panel.addEventListener(ev, () => panel.classList.remove('drag')));
+  panel.addEventListener('drop', e => {
+    e.preventDefault();
+    panel.classList.remove('drag');
+    if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files.length)
+      dodajPliki(e.dataTransfer.files);
+  });
+  ['dragover', 'drop'].forEach(ev => window.addEventListener(ev, e => e.preventDefault()));
+
   renderTiles();
 
   fetch(API + '/api/subjects').then(r => r.json()).then(j => {
@@ -512,6 +526,24 @@ const ROAD = [
     else if (j.hasKey) setStatus('AI: gotowe', 'ok');
     else setStatus('AI: brak klucza', 'warn');
   }).catch(() => setStatus('AI offline', 'bad'));
+})();
+
+/* ---------- QR: otwórz Stację na telefonie ---------- */
+(function initQR() {
+  const box = document.getElementById('qr');
+  const url = location.origin + location.pathname + '#nauka';
+  const link = document.getElementById('qrUrl');
+  if (link) link.textContent = url;
+  if (!box) return;
+  if (typeof QRCode !== 'undefined') {
+    try {
+      new QRCode(box, { text: url, width: 150, height: 150, correctLevel: QRCode.CorrectLevel.M });
+    } catch (e) {
+      box.innerHTML = '<small>Kod QR niedostępny</small>';
+    }
+  } else {
+    box.innerHTML = '<small>Kod QR niedostępny</small>';
+  }
 })();
 
 /* ---------- lightbox ---------- */

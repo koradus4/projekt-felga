@@ -168,6 +168,12 @@ footer{max-width:1250px;margin:0 auto;padding:26px 22px 40px;color:var(--mut);fo
 .quick button{border:1px solid var(--line);background:#fff;border-radius:20px;padding:6px 12px;cursor:pointer;font:inherit;font-size:14px}
 .quick button:hover{background:#eef1f4}
 .quick button.ghost{color:var(--mut)}
+.qrbox{display:flex;gap:16px;align-items:center;border:1px solid var(--line);border-radius:14px;padding:14px 16px;background:#fafbfc;margin:16px 0 4px}
+.qrbox #qr{flex:0 0 auto}
+.qrbox #qr canvas,.qrbox #qr img{display:block;border-radius:8px;background:#fff}
+.qrbox small{color:var(--mut)}
+.qrbox a{font-size:13px;word-break:break-all}
+.panel.drag{outline:3px dashed var(--acc);outline-offset:-6px}
 .fiszki{position:fixed;inset:0;background:rgba(10,12,15,.82);display:grid;place-items:center;z-index:110}
 .fiszki[hidden]{display:none !important}
 .fcard{background:#fff;border-radius:16px;padding:26px 28px;max-width:520px;width:92vw;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.35)}

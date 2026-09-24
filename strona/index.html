@@ -196,6 +196,16 @@
       naraz, z przykładami z warsztatu i pytaniem sprawdzającym po każdej porcji wiedzy.
       Od podstaw do zaawansowanych, z odpytywaniem i wynikami.</p>
 
+      <div class="qrbox">
+        <div id="qr"></div>
+        <div>
+          <b>📱 Otwórz na telefonie</b><br>
+          <small>Zeskanuj kod aparatem — Stacja Nauki otworzy się na telefonie.
+          Możesz też dodać stronę do ekranu głównego (Chrome → ⋮ → „Dodaj do ekranu głównego").</small>
+          <br><a id="qrUrl" href="#nauka"></a>
+        </div>
+      </div>
+
       <div id="naukaTiles" class="tiles"></div>
 
       <div id="naukaPanel" class="panel" hidden>
@@ -223,7 +233,8 @@
           <textarea id="naukaText" rows="2" placeholder="Napisz odpowiedź albo pytanie… (Enter = wyślij)"></textarea>
           <button id="naukaSend">Wyślij</button>
         </div>
-        <p class="hint" style="margin:8px 12px 0">📷 = aparat · 🖼 = galeria (do 3 zdjęć naraz). Zdjęcia nie są zapisywane na serwerze — służą tylko do jednej odpowiedzi.</p>
+        <p class="hint" style="margin:8px 12px 0">📷 = aparat · 🖼 = galeria (do 3 zdjęć naraz) · na komputerze możesz też
+        <b>przeciągnąć zdjęcie myszką</b> na to okno. Zdjęcia nie są zapisywane na serwerze — służą tylko do jednej odpowiedzi.</p>
 
         <div class="quick">
           <button data-q="Zacznij lekcję od początku tematu.">▶ Start tematu</button>
@@ -261,6 +272,7 @@
 </div>
 
 <script src="config.js"></script>
+<script src="vendor/qrcode.min.js"></script>
 <script type="importmap">
 {
   "imports": {
