@@ -213,7 +213,11 @@
 
         <div id="naukaLog" class="chatlog"></div>
 
+        <div id="naukaPreview" class="fotoprev" hidden></div>
+
         <div class="chatin">
+          <button id="naukaFotoBtn" class="fotobtn" title="Zdjęcie zadania z zeszytu">📷</button>
+          <input type="file" id="naukaFoto" accept="image/*" capture="environment" hidden>
           <textarea id="naukaText" rows="2" placeholder="Napisz odpowiedź albo pytanie… (Enter = wyślij)"></textarea>
           <button id="naukaSend">Wyślij</button>
         </div>
@@ -222,7 +226,8 @@
           <button data-q="Zacznij lekcję od początku tematu.">▶ Start tematu</button>
           <button data-q="Wyjaśnij to jeszcze prościej, jak dziecku.">🔁 Prościej</button>
           <button data-q="Odpytaj mnie teraz — zadaj pierwsze pytanie.">❓ Odpytaj mnie</button>
-          <button data-q="Podaj przykład z warsztatu samochodowego.">🔧 Przykład z warsztatu</button>
+          <button data-q="Podaj przykład z mojego życia: garaż, dom, droga do szkoły.">🔧 Przykład z mojego życia</button>
+          <button id="naukaFotoQuick">📷 Zadanie ze zdjęcia</button>
           <button id="naukaClear" class="ghost">🗑 Wyczyść rozmowę</button>
         </div>
       </div>

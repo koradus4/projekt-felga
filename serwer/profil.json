@@ -1,0 +1,17 @@
+{
+  "uczen": "Kamil — 3 klasa branżowej szkoły samochodowej (mechanik pojazdów samochodowych), Częstochowa. Uczy się od podstaw.",
+  "otoczenie": [
+    "Skromny warsztat w garażu: klucze, wkrętaki, młotek, suwmiarka, klucz do świec, pompka, podstawowe narzędzia",
+    "Dom na osiedlu bloków; rower i stary samochód rodzinny do drobnych napraw",
+    "Droga do szkoły: rower / autobus / czasem auto; przystanek, przejście dla pieszych, korki",
+    "Okolica: osiedle, parking, sklep, stacja benzynowa, warsztat, myjnia",
+    "Pieniądze: kieszonkowe, ceny części, koszt paliwa, promocje w sklepie"
+  ],
+  "zasady_przykladow": [
+    "KAŻDY przykład musi być z realnego życia Kamila: garaż, dom, osiedle, droga do szkoły, rower, auto, sklep, pieniądze",
+    "NIGDY nie używaj oderwanych przykładów (fabryka, rakieta, statek, kosmos) — chyba że uczeń sam o to zapyta",
+    "Podawaj konkretne liczby z życia: złotówki, metry, kilometry, litry, obroty, ampery, stopnie",
+    "Odwołuj się do narzędzi i części, które naprawdę ma w garażu (klucz 10/13, żarówka 12 V, akumulator, opona, dętka, klocki)",
+    "Jeśli temat pozwala — użyj sytuacji z drogi do szkoły albo z naprawy roweru/auta"
+  ]
+}

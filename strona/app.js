@@ -281,21 +281,78 @@ const ROAD = [
     }
   }
 
+  /* --- zdjęcia zadania (telefon: aparat) --- */
+  const fotoInput = document.getElementById('naukaFoto');
+  const prevEl = document.getElementById('naukaPreview');
+  let pending = [];
+
+  function renderPrev() {
+    if (!prevEl) return;
+    prevEl.innerHTML = '';
+    prevEl.hidden = pending.length === 0;
+    pending.forEach((u, i) => {
+      const d = document.createElement('div');
+      d.className = 'thumb';
+      d.innerHTML = '<img src="' + u + '" alt="zdjęcie"><span title="usuń">×</span>';
+      d.querySelector('span').onclick = () => { pending.splice(i, 1); renderPrev(); };
+      prevEl.appendChild(d);
+    });
+  }
+
+  function downscale(dataUrl, cb) {
+    const img = new Image();
+    img.onload = () => {
+      const MAX = 1280;
+      const s = Math.min(1, MAX / Math.max(img.width, img.height));
+      const c = document.createElement('canvas');
+      c.width = Math.round(img.width * s);
+      c.height = Math.round(img.height * s);
+      c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+      try { cb(c.toDataURL('image/jpeg', 0.85)); } catch (e) { cb(dataUrl); }
+    };
+    img.onerror = () => cb(dataUrl);
+    img.src = dataUrl;
+  }
+
+  function pickPhoto() { if (fotoInput) fotoInput.click(); }
+  const fotoBtn = document.getElementById('naukaFotoBtn');
+  const fotoQuick = document.getElementById('naukaFotoQuick');
+  if (fotoBtn) fotoBtn.onclick = pickPhoto;
+  if (fotoQuick) fotoQuick.onclick = pickPhoto;
+  if (fotoInput) fotoInput.onchange = () => {
+    const f = fotoInput.files && fotoInput.files[0];
+    fotoInput.value = '';
+    if (!f) return;
+    const fr = new FileReader();
+    fr.onload = () => downscale(fr.result, u => { pending.push(u); renderPrev(); });
+    fr.readAsDataURL(f);
+  };
+
   async function send(text) {
     text = (text || '').trim();
-    if (!text || !cur) return;
+    if ((!text && !pending.length) || !cur) return;
+    const imgs = pending.slice();
+    const tryb = imgs.length ? 'photo' : mode;
+    if (imgs.length && !text) text = 'Zadanie ze zdjęcia — przeczytaj i poprowadź mnie krok po kroku.';
     const d = data(cur);
-    d.log.push({ role: 'user', text });
-    addBubble('user', text);
+    const shown = text + (imgs.length ? '  📷(' + imgs.length + ')' : '');
+    d.log.push({ role: 'user', text: shown });
+    addBubble('user', shown);
+    if (imgs.length) { pending = []; renderPrev(); }
     save();
     txtEl.value = '';
     sendBtn.disabled = true;
-    const wait = addBubble('ai', '…myślę… (po dłuższej przerwie AI budzi się do ~30 s)');
+    const wait = addBubble('ai', imgs.length
+      ? '…czytam zdjęcie i myślę… (po dłuższej przerwie AI budzi się do ~30 s)'
+      : '…myślę… (po dłuższej przerwie AI budzi się do ~30 s)');
     try {
       const r = await fetch(API + '/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ subject: cur, mode: mode, level: d.level, messages: d.log })
+        body: JSON.stringify({
+          subject: cur, mode: tryb, level: d.level,
+          messages: d.log, images: imgs
+        })
       });
       const j = await r.json();
       wait.remove();
