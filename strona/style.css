@@ -187,6 +187,31 @@ footer{max-width:1250px;margin:0 auto;padding:26px 22px 40px;color:var(--mut);fo
 .badge.warn{background:#b7791f}
 .badge.bad{background:var(--bad)}
 
+/* --- Stacja Nauki jako aplikacja (nauka.html) --- */
+body.stacja{background:#0f1216;display:flex;flex-direction:column;min-height:100vh;min-height:100dvh}
+.stopbar{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:10px;padding:10px 14px;background:#0f1216;color:#fff}
+.stopbar b{font-size:16px}
+.stopbar a{font-size:20px;text-decoration:none;color:#fff}
+.stopbar .badge{margin-left:auto}
+.stopmain{flex:1;display:flex;flex-direction:column;gap:12px;padding:12px;min-height:0}
+body.stacja .tiles{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:0}
+body.stacja .tile{padding:14px;border-radius:12px;min-width:0;overflow-wrap:anywhere}
+body.stacja .tile .ic{font-size:22px}
+body.stacja .tile b{font-size:15px}
+body.stacja .tile small{font-size:12.5px}
+body.stacja .panel{margin:0;flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
+body.stacja .panel[hidden]{display:none !important}
+body.stacja .phead{padding:8px 10px;gap:8px}
+body.stacja .phead select{max-width:190px;font-size:13px}
+body.stacja .chatlog{flex:1;height:auto;min-height:40vh;padding:10px}
+body.stacja .chatin{padding:8px;gap:6px;flex-wrap:wrap}
+body.stacja .chatin textarea{min-height:44px}
+body.stacja .chatin .fotobtn{padding:0 12px}
+body.stacja .quick{padding:8px 10px;gap:6px}
+body.stacja .quick button{font-size:13px;padding:6px 10px}
+body.stacja .fotoprev{padding:8px 10px}
+@media(min-width:560px){ body.stacja .tiles{grid-template-columns:repeat(3,minmax(0,1fr))} }
+
 /* responsywność */
 @media(max-width:900px){
   .layout{grid-template-columns:1fr}

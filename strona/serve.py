@@ -10,6 +10,7 @@ mimetypes.add_type('text/css', '.css')
 mimetypes.add_type('application/json', '.json')
 mimetypes.add_type('model/stl', '.stl')
 mimetypes.add_type('image/svg+xml', '.svg')
+mimetypes.add_type('application/manifest+json', '.webmanifest')
 
 PORT = 8000
 

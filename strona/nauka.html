@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Stacja Nauki — korepetytor AI</title>
+<meta name="description" content="Interaktywny korepetytor AI: matematyka, fizyka, elektrotechnika, chemia, materiałoznawstwo, rysunek techniczny, miernictwo, angielski i chiński techniczny.">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0f1216">
+<link rel="apple-touch-icon" href="img/ikona-192.png">
+<link rel="icon" type="image/png" href="img/ikona-192.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="stacja">
+
+<header class="stopbar">
+  <a href="index.html" title="Książka projektu (praca końcowa)">📖</a>
+  <b>Stacja Nauki</b>
+  <span class="badge" id="naukaStatus">łączę…</span>
+</header>
+
+<main class="stopmain">
+  <div id="naukaTiles" class="tiles"></div>
+
+  <div id="naukaPanel" class="panel" hidden>
+    <div class="phead">
+      <b id="naukaTitle">—</b>
+      <label class="lvl">poziom
+        <select id="naukaLevel"></select>
+      </label>
+      <span class="modes">
+        <button id="modeLesson" class="on">📖 Lekcja</button>
+        <button id="modeQuiz">❓ Odpytanka</button>
+      </span>
+      <button id="naukaBack" class="ghost">← przedmioty</button>
+    </div>
+
+    <div id="naukaLog" class="chatlog"></div>
+
+    <div id="naukaPreview" class="fotoprev" hidden></div>
+
+    <div class="chatin">
+      <button id="naukaFotoBtn" class="fotobtn" title="Zrób zdjęcie (aparat)">📷</button>
+      <button id="naukaGalBtn" class="fotobtn" title="Wybierz z galerii (do 3 zdjęć)">🖼</button>
+      <input type="file" id="naukaFoto" accept="image/*" capture="environment" hidden>
+      <input type="file" id="naukaGal" accept="image/*" multiple hidden>
+      <textarea id="naukaText" rows="2" placeholder="Napisz albo dodaj zdjęcie… (Enter = wyślij)"></textarea>
+      <button id="naukaSend">Wyślij</button>
+    </div>
+
+    <div class="quick">
+      <button data-q="Zacznij lekcję od początku tematu.">▶ Start tematu</button>
+      <button data-q="Wyjaśnij to jeszcze prościej, jak dziecku.">🔁 Prościej</button>
+      <button data-q="Odpytaj mnie teraz — zadaj pierwsze pytanie.">❓ Odpytaj mnie</button>
+      <button data-q="Podaj przykład z mojego życia: garaż, dom, droga do szkoły.">🔧 Mój przykład</button>
+      <button id="naukaFotoQuick">📷 Zadanie ze zdjęcia</button>
+      <button id="naukaFiszki">🎴 Fiszki (0)</button>
+      <button id="naukaClear" class="ghost">🗑 Wyczyść</button>
+    </div>
+  </div>
+</main>
+
+<div id="fiszkiOverlay" class="fiszki" hidden>
+  <div class="fcard">
+    <small id="fiszkiLicznik">0/0</small>
+    <div class="fq" id="fiszkiPytanie">—</div>
+    <div class="fa" id="fiszkiOdpowiedz" hidden>—</div>
+    <div class="fbtns">
+      <button id="fiszkiPokaz">Pokaż odpowiedź</button>
+      <button id="fiszkiNastepna">Następna →</button>
+      <button id="fiszkiZamknij" class="ghost">Zamknij</button>
+    </div>
+  </div>
+</div>
+
+<script src="config.js"></script>
+<script src="nauka.js"></script>
+</body>
+</html>
