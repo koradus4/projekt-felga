@@ -13,7 +13,7 @@ const path = require('path');
 
 const PORT = process.env.PORT || 8787;
 const KEY = process.env.DEEPSEEK_API_KEY || '';
-const MODEL = process.env.DEEPSEEK_MODEL || 'deepseek-flash';
+const MODEL = process.env.DEEPSEEK_MODEL || 'deepseek-chat';
 const MOCK = process.env.MOCK_AI === '1';
 const ORIGINS = (process.env.ALLOWED_ORIGINS ||
   'https://projekt-felga.onrender.com,http://localhost:8000,http://127.0.0.1:8000')
