@@ -17,6 +17,14 @@ _Ostatnia aktualizacja: 24.09.2026 · autor: Kamil Borkowski · opiekun: Konrad 
 - [ ] **Plan powtórek**: AI układa tygodniowy plan z błędów
 - [ ] **Rozmowa głosem (🎤 + 🔊)**: Web Speech API (słuchanie po polsku) + speechSynthesis (czytanie odpowiedzi); tryb hands-free. Działa w Chrome/Android — bez dodatkowych kosztów i usług
 
+## 🔧 DO DOPRACOWANIA — Warsztat / wersja v2 (mechanizm)
+- [ ] **Rendery v2** — lepsze kadry (teraz pod dziwnymi kątami; ustawić ładny izometryczny + profil + zbliżenie na tarczę)
+- [ ] **Mechanizm — detale**: pasek GT2 (zaznaczyć linią/pętlą), napinacz paska, fazki/zaokrąglenia podstawy, ładniejsze oprawy (żebra)
+- [ ] **Viewer**: domyślna kamera dopasowana do całej sceny (auto-fit po wczytaniu), lepsze światło
+- [ ] **Karta wersji**: skrócona lista części (12 pozycji to dużo) — np. tylko grupy + licznik
+- [ ] **Edytor**: dodać eksport renderów z GUI (żeby nowe wersje z edytora miały obrazki)
+- [ ] **v2 opis**: dopracować tekst w meta.json (krótszy, „co i dlaczego")
+
 ## ⏳ DO ZROBIENIA — dalsze
 - [ ] **Kafel „Praca końcowa"** — egzamin próbny z rozdziałów pracy
 - [ ] **Analiza FEM felgi** w FreeCAD (naprężenia, odkształcenia) + wykresy na stronę
