@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Projekt „Felga" — praca końcowa</title>
 <meta name="description" content="Interaktywna książka projektu: modelowanie, wykonanie i badania prototypu felgi aluminiowej do samochodu sportowego.">
+<meta name="theme-color" content="#0f1216">
+<link rel="icon" type="image/png" href="img/ikona-192.png">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -13,46 +15,54 @@
 
 <header class="topbar">
   <button id="menuBtn" aria-label="Menu">☰</button>
-  <span class="brand">Projekt&nbsp;„Felga"</span>
+  <span class="brand">Projekt&nbsp;<b>„Felga"</b></span>
   <span class="sub">praca końcowa · klasa 3 · branża samochodowa</span>
 </header>
 
 <div class="layout">
   <aside id="sidebar">
     <nav>
-      <a href="#okladka">Okładka</a>
-      <a href="#wstep">1 · Wstęp</a>
-      <a href="#teoria">2 · Teoria felg <b class="dot on"></b></a>
-      <a href="#projekt">3 · Projekt 3D <b class="dot on"></b></a>
-      <a href="#stanowisko">4 · Stanowisko testowe</a>
-      <a href="#bom">5 · Części i budżet <b class="dot on"></b></a>
-      <a href="#roadmapa">6 · Plan pracy</a>
-      <a href="#galeria">7 · Galeria</a>
-      <a href="#o-projekcie">8 · O projekcie</a>
-      <a href="#nauka">9 · Stacja Nauki <b class="dot on"></b></a>
+      <a href="#okladka">📘 Okładka</a>
+      <a href="#wstep">1 · 📌 Wstęp</a>
+      <a href="#teoria">2 · 🧠 Teoria felg</a>
+      <a href="#projekt">3 · 🔩 Projekt 3D</a>
+      <a href="#stanowisko">4 · ⚙️ Stanowisko testowe</a>
+      <a href="#bom">5 · 💰 Części i budżet</a>
+      <a href="#roadmapa">6 · 🗺 Plan pracy</a>
+      <a href="#galeria">7 · 🖼 Galeria</a>
+      <a href="#o-projekcie">8 · 🛠 O projekcie</a>
+      <a href="#nauka">9 · 🎓 Stacja Nauki <b class="dot on"></b></a>
     </nav>
   </aside>
 
   <main>
 
     <!-- ===== OKŁADKA ===== -->
-    <section id="okladka" class="hero">
-      <p class="eyebrow">Praca końcowa · CosinusYoung Częstochowa · rok szkolny 2025/2026</p>
-      <h1>Modelowanie, wykonanie i&nbsp;badania prototypu <em>felgi aluminiowej</em></h1>
-      <p class="lede">Projekt parametryczny CAD, wydruk 3D w&nbsp;skali 45% i&nbsp;stanowisko
-      testowe sterowane ESP32 — felga <b>17×7.5J 5×112 ET35</b> do samochodu sportowego.</p>
-      <dl class="meta">
-        <div><dt>Uczeń</dt><dd>Kamil Borkowski</dd></div>
-        <div><dt>Klasa</dt><dd>3 · mechanik pojazdów samochodowych</dd></div>
-        <div><dt>Opiekun</dt><dd>Konrad Borkowski</dd></div>
-        <div><dt>Szkoła</dt><dd>CosinusYoung 15+ · Szkoła Branżowa I stopnia, Częstochowa</dd></div>
-      </dl>
-      <p class="hint">Przewiń niżej ↓ — rozdział 3 zawiera <b>model 3D do obracania w przeglądarce</b>.</p>
+    <section id="okladka" class="hero reveal">
+      <div class="hero-in">
+        <div>
+          <p class="eyebrow">Praca końcowa · CosinusYoung Częstochowa · rok szkolny 2025/2026</p>
+          <h1>Modelowanie, wykonanie i&nbsp;badania prototypu <em>felgi aluminiowej</em></h1>
+          <p class="lede">Projekt parametryczny CAD, wydruk 3D w&nbsp;skali 45% i&nbsp;stanowisko
+          testowe sterowane ESP32 — felga <b>17×7.5J 5×112 ET35</b> do samochodu sportowego.</p>
+          <div class="hero-btns">
+            <a class="btn primary" href="nauka.html">🎓 Otwórz Stację Nauki</a>
+            <a class="btn ghost" href="#projekt">🔩 Zobacz projekt 3D</a>
+          </div>
+          <dl class="meta">
+            <div><dt>Uczeń</dt><dd>Kamil Borkowski</dd></div>
+            <div><dt>Klasa</dt><dd>3 · mechanik pojazdów samochodowych</dd></div>
+            <div><dt>Opiekun</dt><dd>Konrad Borkowski</dd></div>
+            <div><dt>Szkoła</dt><dd>CosinusYoung 15+ · Szkoła Branżowa I stopnia</dd></div>
+          </dl>
+        </div>
+        <div class="hero-img"><img src="img/profil.png" alt="Model felgi 17×7.5J — widok z profilu"></div>
+      </div>
     </section>
 
     <!-- ===== WSTĘP ===== -->
-    <section id="wstep">
-      <h2>1 · Wstęp</h2>
+    <section id="wstep" class="reveal">
+      <h2>📌 1 · Wstęp</h2>
       <p><b>Cel pracy:</b> zaprojektować, wykonać i przebadać prototyp felgi aluminiowej
       przeznaczonej do samochodu sportowego, a następnie zweryfikować geometrię i wyważenie
       na własnym stanowisku pomiarowym.</p>
@@ -68,8 +78,8 @@
     </section>
 
     <!-- ===== TEORIA ===== -->
-    <section id="teoria">
-      <h2>2 · Teoria felg</h2>
+    <section id="teoria" class="reveal">
+      <h2>🧠 2 · Teoria felg</h2>
       <h3>Oznaczenia na feldze</h3>
       <table class="tbl">
         <thead><tr><th>Oznaczenie</th><th>Znaczenie</th><th>Nasza felga</th></tr></thead>
@@ -94,13 +104,11 @@
           <tr><td>CNC (frezowanie)</td><td>powtarzalność, detale</td><td>długi czas, koszt</td></tr>
         </tbody>
       </table>
-      <h3>Sprawdź się — quiz <span class="badge" id="quizScore">0/6</span></h3>
-      <div id="quiz" class="quiz"></div>
     </section>
 
     <!-- ===== PROJEKT ===== -->
-    <section id="projekt">
-      <h2>3 · Projekt 3D</h2>
+    <section id="projekt" class="reveal">
+      <h2>🔩 3 · Projekt 3D</h2>
       <p>Model wykonany <b>parametrycznie w FreeCAD</b> — wszystkie wymiary pochodzą z arkusza
       „Parametry", więc zmiana wartości przebudowuje felgę.</p>
       <div class="prow">
@@ -127,18 +135,18 @@
           </table>
           <h3>Pliki do druku</h3>
           <p class="dl">
-            <a href="download/obrecz_druk45.stl" download>obręcz (czarna)</a>
-            <a href="download/srodek_druk45.stl" download>środek (szary)</a>
-            <a href="download/sruba_druk45.stl" download>śruba M14</a>
-            <a href="download/nasadka_druk45.stl" download>nasadka 17</a>
+            <a href="download/obrecz_druk45.stl" download>⬇ obręcz (czarna)</a>
+            <a href="download/srodek_druk45.stl" download>⬇ środek (szary)</a>
+            <a href="download/sruba_druk45.stl" download>⬇ śruba M14</a>
+            <a href="download/nasadka_druk45.stl" download>⬇ nasadka 17</a>
           </p>
         </div>
       </div>
     </section>
 
     <!-- ===== STANOWISKO ===== -->
-    <section id="stanowisko">
-      <h2>4 · Stanowisko testowe</h2>
+    <section id="stanowisko" class="reveal">
+      <h2>⚙️ 4 · Stanowisko testowe</h2>
       <p>Cel: zamocować prototyp felgi i&nbsp;wprawić go w&nbsp;ruch, mierząc parametry.
       Napęd: <b>silnik krokowy NEMA 17</b> + sterownik <b>DRV8825/TMC2209</b>, sterowanie
       <b>ESP32</b> (Wi-Fi + strona z regulacją), pomiar: obroty (Hall), drgania (MPU6050),
@@ -154,8 +162,8 @@
     </section>
 
     <!-- ===== BOM ===== -->
-    <section id="bom">
-      <h2>5 · Części i budżet</h2>
+    <section id="bom" class="reveal">
+      <h2>💰 5 · Części i budżet</h2>
       <p>Odznacz to, co <b>już masz</b> — kalkulator policzy, ile zostaje do kupienia.</p>
       <div id="bomTable"></div>
       <div class="sum"><span>Do kupienia:</span><b id="bomSum">—</b></div>
@@ -163,14 +171,14 @@
     </section>
 
     <!-- ===== ROADMAPA ===== -->
-    <section id="roadmapa">
-      <h2>6 · Plan pracy</h2>
+    <section id="roadmapa" class="reveal">
+      <h2>🗺 6 · Plan pracy</h2>
       <ol id="roadmap" class="road"></ol>
     </section>
 
     <!-- ===== GALERIA ===== -->
-    <section id="galeria">
-      <h2>7 · Galeria</h2>
+    <section id="galeria" class="reveal">
+      <h2>🖼 7 · Galeria</h2>
       <div class="gal">
         <figure><img src="img/profil.png" alt="Profil felgi"><figcaption>Profil — 7 ramion, wpuszczane śruby</figcaption></figure>
         <figure><img src="img/3d.png" alt="Felga 3D"><figcaption>Widok 3D — obręcz czarna, środek szary</figcaption></figure>
@@ -180,8 +188,8 @@
     </section>
 
     <!-- ===== O PROJEKCIE ===== -->
-    <section id="o-projekcie">
-      <h2>8 · O projekcie</h2>
+    <section id="o-projekcie" class="reveal">
+      <h2>🛠 8 · O projekcie</h2>
       <p><b>Narzędzia:</b> FreeCAD 1.0 (model + FEM), OrcaSlicer (druk), Blender (rendery),
       KiCad (płytka), ESP32 + Arduino (firmware), Git/GitHub (wersje), Render (hosting).</p>
       <p><b>Wsparcie AI:</b> model i&nbsp;firmware powstały przy wsparciu asystenta AI
@@ -190,8 +198,8 @@
     </section>
 
     <!-- ===== STACJA NAUKI ===== -->
-    <section id="nauka">
-      <h2>9 · Stacja Nauki <span class="badge" id="naukaStatus">łączę…</span></h2>
+    <section id="nauka" class="reveal">
+      <h2>🎓 9 · Stacja Nauki <span class="badge" id="naukaStatus">łączę…</span></h2>
       <p>Korepetytor AI dla przedmiotów ścisłych — tłumaczy <b>prosto, jak dziecku</b>, jedno pojęcie
       naraz, z przykładami z warsztatu i pytaniem sprawdzającym po każdej porcji wiedzy.
       Od podstaw do zaawansowanych, z odpytywaniem i wynikami.</p>
@@ -241,7 +249,7 @@
           <button data-q="Zacznij lekcję od początku tematu.">▶ Start tematu</button>
           <button data-q="Wyjaśnij to jeszcze prościej, jak dziecku.">🔁 Prościej</button>
           <button data-q="Odpytaj mnie teraz — zadaj pierwsze pytanie.">❓ Odpytaj mnie</button>
-          <button data-q="Podaj przykład z mojego życia: garaż, dom, droga do szkoły.">🔧 Przykład z mojego życia</button>
+          <button data-q="Podaj przykład z mojego życia: garaż, dom, droga do szkoły.">🔧 Mój przykład</button>
           <button id="naukaFotoQuick">📷 Zadanie ze zdjęcia</button>
           <button id="naukaFiszki">🎴 Fiszki (0)</button>
           <button id="naukaClear" class="ghost">🗑 Wyczyść rozmowę</button>
@@ -253,8 +261,8 @@
 </div>
 
 <footer>
-  <span>© 2026 Kamil Borkowski · CosinusYoung Częstochowa</span>
-  <span>FreeCAD · OrcaSlicer · Blender · ESP32</span>
+  <span><b>Projekt „Felga"</b> · © 2026 Kamil Borkowski · CosinusYoung Częstochowa</span>
+  <span>FreeCAD · OrcaSlicer · Blender · ESP32 · Render</span>
 </footer>
 
 <div id="lightbox" class="lightbox" hidden><img alt=""><span class="close">×</span></div>

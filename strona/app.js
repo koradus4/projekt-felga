@@ -107,57 +107,6 @@ document.querySelectorAll('#sidebar a').forEach(a =>
   })();
 })();
 
-/* ---------- QUIZ ---------- */
-const QUIZ = [
-  ['Co oznacza „7.5J" na feldze?',
-   ['Szerokość felgi 7,5 cala (rant typu J)', 'Średnica felgi 7,5 cala', 'Nośność 7,5 tony'], 0,
-   '7.5J = 7,5 cala szerokości między rantami; litera J opisuje profil rantu.'],
-  ['Parametr ET35 to:',
-   ['Odsadzenie — płaszczyzna montażu 35 mm od środka felgi', 'Średnica otworu centrującego', 'Rozstaw śrub 35 mm'], 0,
-   'ET (offset) mówi, jak głęboko felga wchodzi w nadkole.'],
-  ['Oznaczenie 5×112 opisuje:',
-   ['5 otworów na okręgu o średnicy 112 mm', '5 cali szerokości, 112 mm ET', 'Średnicę felgi 112 mm'], 0,
-   'PCD — rozstaw śrub: liczba otworów × średnica okręgu.'],
-  ['CB Ø57,1 mm to:',
-   ['Otwór centrujący dopasowany do piasty', 'Średnica rantu', 'Grubość tarczy felgi'], 0,
-   'CB centruje felgę na piaście — kluczowe dla bicia i wyważenia.'],
-  ['Stop aluminium typowy na felgi odlewane to:',
-   ['A356.0 (T6)', '6061-T6', 'PA6', 'St3'], 0,
-   'A356.0-T6 — odlewniczy stop Al-Si-Mg. 6061-T6 stosuje się do felg kutych.'],
-  ['Technologia „flow forming" polega na:',
-   ['Formowaniu materiału przez płynięcie na obracającym się trzpieniu', 'Odlaniu felgi w formie', 'Frezowaniu z bloku'], 0,
-   'Daje cienkie i mocne ścianki — pośrednie między odlewem a kuciem.']
-];
-(function initQuiz() {
-  const box = document.getElementById('quiz');
-  const scoreEl = document.getElementById('quizScore');
-  if (!box) return;
-  let done = 0, ok = 0;
-  QUIZ.forEach(([q, answers, correct, why], i) => {
-    const d = document.createElement('div');
-    d.className = 'q';
-    d.innerHTML = '<p>' + (i + 1) + '. ' + q + '</p>';
-    answers.forEach((a, j) => {
-      const b = document.createElement('button');
-      b.textContent = a;
-      b.onclick = () => {
-        if (d.dataset.done) return;
-        d.dataset.done = '1';
-        done++;
-        if (j === correct) { b.classList.add('ok'); ok++; }
-        else {
-          b.classList.add('bad');
-          d.querySelectorAll('button')[correct].classList.add('ok');
-        }
-        d.insertAdjacentHTML('beforeend', '<p class="why">' + why + '</p>');
-        scoreEl.textContent = ok + '/' + QUIZ.length;
-      };
-      d.appendChild(b);
-    });
-    box.appendChild(d);
-  });
-})();
-
 /* ---------- BOM + kalkulator ---------- */
 const BOM = [
   ['Elektronika', 'Silnik krokowy NEMA 17 (17HS4401, 0,4 Nm)', 45, false],
@@ -252,4 +201,15 @@ const ROAD = [
     lb.hidden = false;
   });
   lb.onclick = () => { lb.hidden = true; img.src = ''; };
+})();
+
+/* ---------- animacje wejścia sekcji ---------- */
+(function initReveal() {
+  const el = document.querySelectorAll('.reveal');
+  if (!el.length) return;
+  if (!('IntersectionObserver' in window)) { el.forEach(e => e.classList.add('in')); return; }
+  const obs = new IntersectionObserver(ents => {
+    ents.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); obs.unobserve(en.target); } });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+  el.forEach(e => obs.observe(e));
 })();
