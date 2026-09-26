@@ -1,0 +1,38 @@
+[
+  {
+    "id": "obrecz",
+    "nazwa": "Obręcz",
+    "plik": "obrecz.stl",
+    "step": "step/obrecz.step",
+    "grupa": "felga",
+    "kolor": "#14161a",
+    "widoczna": true
+  },
+  {
+    "id": "srodek",
+    "nazwa": "Środek (piasta + ramiona)",
+    "plik": "srodek.stl",
+    "step": "step/srodek.step",
+    "grupa": "felga",
+    "kolor": "#9aa1a8",
+    "widoczna": true
+  },
+  {
+    "id": "sruba",
+    "nazwa": "Śruba M14",
+    "plik": "sruba.stl",
+    "step": "step/sruba.step",
+    "grupa": "osprzęt",
+    "kolor": "#7d838a",
+    "widoczna": true
+  },
+  {
+    "id": "nasadka",
+    "nazwa": "Nasadka 17 mm",
+    "plik": "nasadka.stl",
+    "step": "step/nasadka.step",
+    "grupa": "osprzęt",
+    "kolor": "#b9bec3",
+    "widoczna": true
+  }
+]

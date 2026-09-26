@@ -293,3 +293,20 @@ body.warsztat .hint a{color:var(--acc)}
 .gal.mini{grid-template-columns:repeat(auto-fit,minmax(110px,1fr))}
 .gal.mini img{aspect-ratio:4/3}
 @media(max-width:900px){ .wgrid{grid-template-columns:1fr} .wgrid #wviewer{height:340px} }
+
+/* ===== Warsztat: pasek części i eksport ===== */
+.czescibar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding:10px 12px;background:#161a20;border-top:1px solid #2b3239}
+.czescibar .grp{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--alu);margin:0 6px 0 8px}
+.chip{display:inline-flex;align-items:center;gap:6px;border:1px solid #333b44;background:var(--graphite-2);color:#c9d1d9;
+  border-radius:20px;padding:5px 11px;font:inherit;font-size:13px;cursor:pointer;transition:.2s}
+.chip i{width:9px;height:9px;border-radius:50%;display:inline-block;border:1px solid rgba(255,255,255,.35)}
+.chip:hover{border-color:#5a6472}
+.chip.on{background:rgba(255,196,0,.16);border-color:var(--acc);color:#fff}
+.chip.all{color:var(--acc);border-style:dashed}
+.eksportbar{padding:9px 12px;background:#12161b;border-top:1px solid #2b3239;color:#9aa1a8;font-size:13px;
+  display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.eksportbar b{color:#c9d1d9}
+.eksportbar a{color:var(--acc);font-size:12.5px;white-space:nowrap}
+.abtn{display:inline-flex;align-items:center;gap:6px;padding:7px 13px;border-radius:10px;border:1px solid var(--acc);
+  color:var(--acc);font-weight:600;text-decoration:none;font-size:14px}
+.abtn:hover{background:var(--acc);color:var(--graphite);text-decoration:none}

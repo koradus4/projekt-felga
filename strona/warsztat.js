@@ -1,5 +1,5 @@
-/* ===== Warsztat — historia wersji projektu ===== */
-(function initWarsztat() {
+/* ===== Warsztat — historia wersji + czesci ===== */
+(async function () {
   const osEl = document.getElementById('os');
   if (!osEl) return;
 
@@ -10,46 +10,30 @@
   const paramsEl = document.getElementById('wParams');
   const plikiEl = document.getElementById('wPliki');
   const galEl = document.getElementById('wGal');
+  const czesciEl = document.getElementById('wCzesci');
+  const eksportEl = document.getElementById('wEksport');
+  const osobnoA = document.getElementById('wOsobno');
 
-  let wersje = [], cur = 0, trzy = null;
+  let wersje = [], cur = 0, trzy = null, czesci = [], meshById = {};
 
-  /* --- kolory części --- */
-  function kolor(nazwa) {
-    const n = nazwa.toLowerCase();
-    if (n.includes('obrecz') || n.includes('obręcz')) return 0x14161a;
-    if (n.includes('srodek') || n.includes('środek')) return 0x9aa1a8;
-    if (n.includes('sruba') || n.includes('śruba')) return 0x7d838a;
-    if (n.includes('nasadka')) return 0xb9bec3;
-    if (n.includes('tarcza')) return 0xffc400;
-    if (n.includes('wal') || n.includes('wał')) return 0xc9ced4;
-    if (n.includes('lozysk') || n.includes('łożysk')) return 0x6b7280;
-    if (n.includes('podstawa')) return 0x3b4450;
-    return 0x8f979f;
-  }
-  function metal(name) {
-    const n = name.toLowerCase();
-    if (n.includes('obrecz')) return { m: 0.55, r: 0.42 };
-    if (n.includes('srodek')) return { m: 0.8, r: 0.32 };
-    return { m: 0.7, r: 0.38 };
-  }
+  const HEX = c => parseInt(String(c).replace('#', ''), 16) || 0x8f979f;
 
   /* --- 3D --- */
-  async function init3D() {
-    let THREE, OrbitControls, STLLoader;
-    try {
-      THREE = await import('three');
-      ({ OrbitControls } = await import('three/addons/controls/OrbitControls.js'));
-      ({ STLLoader } = await import('three/addons/loaders/STLLoader.js'));
-    } catch (e) {
-      document.getElementById('wviewer').innerHTML =
-        '<p style="padding:20px;color:#9aa1a8">Nie udało się wczytać biblioteki 3D.</p>';
-      return;
-    }
+  let THREE, OrbitControls, STLLoader;
+  try {
+    THREE = await import('three');
+    ({ OrbitControls } = await import('three/addons/controls/OrbitControls.js'));
+    ({ STLLoader } = await import('three/addons/loaders/STLLoader.js'));
+  } catch (e) {
+    document.getElementById('wviewer').innerHTML =
+      '<p style="padding:20px;color:#9aa1a8">Nie udało się wczytać biblioteki 3D.</p>';
+  }
+
+  if (THREE) {
     const host = document.getElementById('wviewer');
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
     host.appendChild(renderer.domElement);
-
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0x12161b);
     const camera = new THREE.PerspectiveCamera(38, 1, 1, 8000);
@@ -58,76 +42,103 @@
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.target.set(0, 0, 0);
-
     scene.add(new THREE.HemisphereLight(0xffffff, 0x2a3037, 1.15));
     const l1 = new THREE.DirectionalLight(0xffffff, 1.35); l1.position.set(600, 900, 700); scene.add(l1);
     const l2 = new THREE.DirectionalLight(0xffffff, 0.55); l2.position.set(-700, -400, -600); scene.add(l2);
-
-    const outer = new THREE.Group();
-    outer.rotation.x = -Math.PI / 2;
-    scene.add(outer);
-    const spin = new THREE.Group();
-    outer.add(spin);
-    const ghost = new THREE.Group();
-    outer.add(ghost);
+    const outer = new THREE.Group(); outer.rotation.x = -Math.PI / 2; scene.add(outer);
+    const spin = new THREE.Group(); outer.add(spin);
+    const ghost = new THREE.Group(); outer.add(ghost);
 
     function resize() {
       const w = host.clientWidth || 600, h = host.clientHeight || 440;
       renderer.setSize(w, h);
-      camera.aspect = w / h;
-      camera.updateProjectionMatrix();
+      camera.aspect = w / h; camera.updateProjectionMatrix();
     }
-    resize();
-    addEventListener('resize', resize);
-
+    resize(); addEventListener('resize', resize);
     (function loop() {
       requestAnimationFrame(loop);
       if (trzy && trzy.auto) spin.rotation.z += 0.0045;
       controls.update();
       renderer.render(scene, camera);
     })();
-
-    trzy = { THREE, OrbitControls, STLLoader, scene, camera, controls, renderer,
-             spin, ghost, home: HOME, auto: true, wire: false, porownaj: false };
+    trzy = { scene, camera, controls, spin, ghost, home: HOME, auto: true, wire: false, porownaj: false };
   }
 
-  function wyczysc(grupa) {
-    while (grupa.children.length) {
-      const o = grupa.children.pop();
-      if (o.geometry) o.geometry.dispose();
-      if (o.material) o.material.dispose();
-    }
+  const wyczysc = g => { while (g.children.length) { const o = g.children.pop(); if (o.geometry) o.geometry.dispose(); if (o.material) o.material.dispose(); } };
+
+  function matCzesci(c) {
+    return new THREE.MeshStandardMaterial({ color: HEX(c.kolor), metalness: 0.7, roughness: 0.38 });
   }
 
-  function wczytaj(meta, grupa, ghostMode) {
-    const loader = new trzy.STLLoader();
-    (meta.model || []).forEach(fn => {
-      loader.load('wersje/' + meta.id + '/' + fn, geo => {
+  function wczytajCzesci(meta, lista, grupa, ghostMode) {
+    const loader = new STLLoader();
+    lista.forEach(c => {
+      loader.load('wersje/' + meta.id + '/' + c.plik, geo => {
         geo.computeVertexNormals();
         const mat = ghostMode
-          ? new three_part_material(false)
-          : new three_part_material(true, kolor(fn), fn);
-        const mesh = new trzy.THREE.Mesh(geo, mat);
-        grupa.add(mesh);
+          ? new THREE.MeshStandardMaterial({ color: 0xffc400, transparent: true, opacity: 0.16, wireframe: true })
+          : matCzesci(c);
+        const m = new THREE.Mesh(geo, mat);
+        m.visible = ghostMode ? true : (c.widoczna !== false);
+        grupa.add(m);
+        if (!ghostMode) meshById[c.id] = m;
       }, undefined, () => {});
     });
   }
-  function three_part_material(solid, col, fn) {
-    const THREE = trzy.THREE;
-    if (!solid) return new THREE.MeshStandardMaterial({
-      color: 0xffc400, transparent: true, opacity: 0.18, wireframe: true
+
+  /* --- zakładki części --- */
+  function renderCzesci() {
+    if (!czesciEl) return;
+    czesciEl.innerHTML = '';
+    const grupy = {};
+    czesci.forEach(c => { (grupy[c.grupa || 'projekt'] = grupy[c.grupa || 'projekt'] || []).push(c); });
+    Object.keys(grupy).forEach(g => {
+      czesciEl.insertAdjacentHTML('beforeend', '<span class="grp">' + g + '</span>');
+      grupy[g].forEach(c => {
+        const b = document.createElement('button');
+        b.className = 'chip' + (c.widoczna !== false ? ' on' : '');
+        b.innerHTML = '<i style="background:' + (c.kolor || '#8f979f') + '"></i>' + c.nazwa;
+        b.onclick = () => {
+          c.widoczna = c.widoczna === false;
+          b.classList.toggle('on', c.widoczna !== false);
+          if (meshById[c.id]) meshById[c.id].visible = c.widoczna !== false;
+          updateEksport();
+        };
+        czesciEl.appendChild(b);
+      });
     });
-    const mm = metal(fn || '');
-    return new THREE.MeshStandardMaterial({ color: col, metalness: mm.m, roughness: mm.r });
+    const all = document.createElement('button');
+    all.className = 'chip all';
+    all.textContent = 'Wszystkie';
+    all.onclick = () => {
+      czesci.forEach(c => c.widoczna = true);
+      Object.values(meshById).forEach(m => m.visible = true);
+      renderCzesci();
+    };
+    czesciEl.appendChild(all);
   }
 
-  function pokazWersje(i) {
-    if (!wersje.length || !trzy) return;
+  function updateEksport() {
+    if (!eksportEl) return;
+    const w = wersje[cur];
+    const sel = czesci.filter(c => c.widoczna !== false);
+    if (!sel.length) { eksportEl.innerHTML = 'Nic nie zaznaczono.'; return; }
+    eksportEl.innerHTML = '<b>Pobierz zaznaczone:</b> ' + sel.map(c =>
+      '<a href="wersje/' + w.id + '/' + c.plik + '" download>⬇ ' + c.id + '.stl</a>' +
+      (c.step ? '<a href="wersje/' + w.id + '/' + c.step + '" download>STEP</a>' : '')
+    ).join(' ') + ' <a href="wersje/' + w.id + '/projekt.zip" download>📦 cała wersja (ZIP)</a>';
+    if (osobnoA) {
+      osobnoA.href = 'podglad.html?wersja=' + w.id + '&czesci=' + sel.map(c => c.id).join(',');
+    }
+  }
+
+  /* --- wersja --- */
+  async function pokazWersje(i) {
+    if (!wersje.length) return;
     cur = Math.max(0, Math.min(wersje.length - 1, i));
     const w = wersje[cur];
 
     document.querySelectorAll('.os .wv').forEach((b, k) => b.classList.toggle('on', k === cur));
-
     tytul.textContent = w.id.toUpperCase() + ' · ' + w.tytul;
     dataEl.textContent = 'opublikowano: ' + (w.data || '—');
     opisEl.textContent = w.opis || '';
@@ -138,29 +149,35 @@
     });
 
     plikiEl.innerHTML = '';
-    (w.model || []).forEach(fn => {
-      plikiEl.insertAdjacentHTML('beforeend',
-        '<a href="wersje/' + w.id + '/' + fn + '" download>⬇ ' + fn + '</a>');
-    });
-    if (w.zrodlo) {
-      plikiEl.insertAdjacentHTML('beforeend',
-        '<a href="wersje/' + w.id + '/' + w.zrodlo + '" download>⬇ źródło (FreeCAD)</a>');
-    }
+    (w.model || []).forEach(fn => plikiEl.insertAdjacentHTML('beforeend',
+      '<a href="wersje/' + w.id + '/' + fn + '" download>⬇ ' + fn + '</a>'));
+    if (w.zrodlo) plikiEl.insertAdjacentHTML('beforeend',
+      '<a href="wersje/' + w.id + '/' + w.zrodlo + '" download>⬇ źródło (FreeCAD)</a>');
 
     galEl.innerHTML = '';
-    (w.img || []).forEach(fn => {
-      galEl.insertAdjacentHTML('beforeend',
-        '<figure><a href="wersje/' + w.id + '/' + fn + '" target="_blank">' +
-        '<img src="wersje/' + w.id + '/' + fn + '" alt="' + w.id + '"></a></figure>');
-    });
+    (w.img || []).forEach(fn => galEl.insertAdjacentHTML('beforeend',
+      '<figure><a href="wersje/' + w.id + '/' + fn + '" target="_blank">' +
+      '<img src="wersje/' + w.id + '/' + fn + '" alt=""></a></figure>'));
 
-    wyczysc(trzy.spin);
-    wyczysc(trzy.ghost);
-    wczytaj(w, trzy.spin, false);
-    if (trzy.porownaj && wersje[cur + 1]) wczytaj(wersje[cur + 1], trzy.ghost, true);
+    if (!trzy) return;
+    wyczysc(trzy.spin); wyczysc(trzy.ghost);
+    meshById = {};
+    try {
+      const r = await fetch('wersje/' + w.id + '/czesci.json');
+      czesci = await r.json();
+      if (!Array.isArray(czesci)) throw new Error('zly format');
+    } catch (e) {
+      czesci = (w.model || []).map(fn => ({
+        id: fn.replace('.stl', ''), nazwa: fn, plik: fn,
+        grupa: 'projekt', kolor: '#8f979f', widoczna: true
+      }));
+    }
+    renderCzesci();
+    wczytajCzesci(w, czesci, trzy.spin, false);
+    if (trzy.porownaj && wersje[cur + 1]) wczytajCzesci(wersje[cur + 1], czesci, trzy.ghost, true);
+    updateEksport();
   }
 
-  /* --- os czasu --- */
   function renderOs() {
     osEl.innerHTML = '';
     wersje.forEach((w, i) => {
@@ -173,21 +190,18 @@
       b.onclick = () => pokazWersje(i);
       osEl.appendChild(b);
     });
-    if (badge) badge.textContent = wersje.length + ' wersje';
+    if (badge) badge.textContent = wersje.length + ' wersji';
   }
 
-  fetch('wersje/index.json').then(r => r.json()).then(j => {
-    wersje = (j.wersje || []);
+  try {
+    const j = await (await fetch('wersje/index.json')).json();
+    wersje = j.wersje || [];
     renderOs();
-  }).catch(() => {
+  } catch (e) {
     osEl.innerHTML = '<p class="hint">Nie udało się wczytać historii wersji.</p>';
-  });
+  }
 
-  init3D().then(() => {
-    const wait = setInterval(() => {
-      if (wersje.length && trzy) { pokazWersje(0); clearInterval(wait); }
-    }, 200);
-  });
+  if (trzy && wersje.length) pokazWersje(0);
 
   document.getElementById('wReset').onclick = () => {
     if (!trzy) return;
@@ -211,6 +225,6 @@
     trzy.porownaj = !trzy.porownaj;
     porBtn.textContent = trzy.porownaj ? 'Porównanie: ON' : 'Porównaj z poprzednią';
     wyczysc(trzy.ghost);
-    if (trzy.porownaj && wersje[cur + 1]) wczytaj(wersje[cur + 1], trzy.ghost, true);
+    if (trzy.porownaj && wersje[cur + 1]) wczytajCzesci(wersje[cur + 1], czesci, trzy.ghost, true);
   };
 })();

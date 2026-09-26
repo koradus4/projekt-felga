@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Podgląd części — Warsztat</title>
+<meta name="theme-color" content="#0f1216">
+<link rel="icon" type="image/png" href="img/ikona-192.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="warsztat">
+
+<header class="stopbar">
+  <a href="warsztat.html" title="Wróć do Warsztatu">↩</a>
+  <b id="pTitle">Podgląd</b>
+  <span class="badge" id="pInfo">…</span>
+</header>
+
+<main class="wmain">
+  <div class="viewer-wrap" style="max-width:1100px;margin:0 auto">
+    <div id="pviewer" style="height:min(70vh,620px)"></div>
+    <div class="viewer-ui">
+      <button id="pReset">Wyśrodkuj</button>
+      <button id="pWire">Siatka</button>
+      <button id="pSpin">Obrót: ON</button>
+      <a class="abtn" id="pZip" href="#">📦 Pobierz tę wersję (ZIP)</a>
+    </div>
+  </div>
+  <p class="hint" id="pLista" style="max-width:1100px;margin:12px auto 0"></p>
+</main>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "./vendor/three.module.js",
+    "three/addons/": "./vendor/addons/"
+  }
+}
+</script>
+<script src="podglad.js"></script>
+</body>
+</html>

@@ -70,20 +70,24 @@ def main():
     os.makedirs(vdir, exist_ok=True)
 
     model, img, zrodlo = [], [], ''
-    for fn in sorted(os.listdir(a.zrodlo)):
-        src = os.path.join(a.zrodlo, fn)
-        if not os.path.isfile(src):
-            continue
-        low = fn.lower()
-        if low.endswith('.stl') and 'druk45' not in low:
-            shutil.copy2(src, os.path.join(vdir, fn))
-            model.append(fn)
-        elif low.endswith('.png'):
-            shutil.copy2(src, os.path.join(vdir, fn))
-            img.append(fn)
-        elif low.endswith('.fcstd'):
-            shutil.copy2(src, os.path.join(vdir, 'zrodlo.FCStd'))
-            zrodlo = 'zrodlo.FCStd'
+    for root, _dirs, files in os.walk(a.zrodlo):
+        for fn in sorted(files):
+            low = fn.lower()
+            if low.endswith('.stl') and 'druk45' in low:
+                continue
+            src = os.path.join(root, fn)
+            rel = os.path.relpath(src, a.zrodlo).replace('\\', '/')
+            if low.endswith('.fcstd'):
+                rel = 'zrodlo.FCStd'
+            dst = os.path.join(vdir, rel)
+            os.makedirs(os.path.dirname(dst), exist_ok=True)
+            shutil.copy2(src, dst)
+            if low.endswith('.stl'):
+                model.append(rel)
+            elif low.endswith('.png'):
+                img.append(rel)
+            elif low.endswith('.fcstd'):
+                zrodlo = rel
 
     parametry = {}
     if a.parametry:
