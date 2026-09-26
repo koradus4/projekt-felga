@@ -21,6 +21,11 @@ import Part
 import Mesh
 import MeshPart
 
+_HERE = os.path.dirname(os.path.abspath(__file__))
+if _HERE not in sys.path:
+    sys.path.append(_HERE)
+import mechanizm as MECH
+
 # ---------- parametry domyslne (te same co w Felga_parametryczna.py) ----------
 DEF = {
     "CAL": 17.0, "SZER_J": 7.5, "PCD": 112.0, "N_SRUB": 5,
@@ -181,6 +186,8 @@ def zbuduj(P):
         "Obręcz (ścianka)": '%.0f mm' % t,
         "Kieszenie śrub": 'Ø%.0f × %.0f mm' % (P["D_KIOSZENI"], h_kie),
         "Otwór śrub": 'Ø%.0f mm + gniazdo R%.0f' % (P["D_OTW_SRUB"], P["R_GNIAZDA"]),
+        "Skala mechanizmu": '45%% (tarcza Ø%.0f, PCD %.1f)' % (2 * MECH.R_TAR, P["PCD"] * MECH.S),
+        "Stanowisko": 'wał Ø8, łożyska 608, NEMA 17, pasek GT2',
     }
     return obrecza, srodek, sruba, nasadka, opis
 
@@ -203,9 +210,27 @@ def main():
     stepdir = os.path.join(out, "step")
     os.makedirs(stepdir, exist_ok=True)
 
+    # felga na tarczy montazowej (skala 45% -> os X)
+    import math as _m
+    S = MECH.S
+    rot = App.Rotation(App.Vector(0, 1, 0), 90)
+    poz = App.Vector(MECH.X_TAR + MECH.T_TAR - P["ET"] * S, 0, MECH.Z_OSI)
+    obrecza2 = obrecza.copy()
+    obrecza2.Placement = App.Placement(poz, rot)
+    srodek2 = srodek.copy()
+    srodek2.Placement = App.Placement(poz, rot)
+
     czesci = [
-        ("obrecz", "Obręcz", obrecza, "felga", "#14161a", True),
-        ("srodek", "Środek (piasta + ramiona)", srodek, "felga", "#9aa1a8", True),
+        ("obrecz", "Obręcz felgi", obrecza2, "felga", "#14161a", True),
+        ("srodek", "Środek felgi (piasta + ramiona)", srodek2, "felga", "#9aa1a8", True),
+        ("tarcza", "Tarcza montażowa (skala 45%)", MECH.tarcza(P), "mechanizm", "#ffc400", True),
+        ("wal", "Wał Ø8", MECH.walek(), "mechanizm", "#c9ced4", True),
+        ("lozyska", "Łożyska 608 × 2", MECH.lozyska(), "mechanizm", "#6b7280", True),
+        ("oprawy", "Oprawy łożysk", MECH.oprawy(), "mechanizm", "#6f7780", True),
+        ("podstawa", "Podstawa stanowiska", MECH.podstawa(), "mechanizm", "#3b4450", True),
+        ("wspornik", "Wspornik silnika (NEMA 17)", MECH.wspornik(), "napęd", "#4a545f", True),
+        ("silnik", "Silnik NEMA 17", MECH.silnik(), "napęd", "#2b3239", True),
+        ("kola", "Koła pasowe GT2 40T + 20T", MECH.kola_pasowe(), "napęd", "#b9bec3", True),
         ("sruba", "Śruba M14", sruba, "osprzęt", "#7d838a", True),
         ("nasadka", "Nasadka 17 mm", nasadka, "osprzęt", "#b9bec3", True),
     ]

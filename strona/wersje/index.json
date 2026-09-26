@@ -1,35 +1,70 @@
 {
-    "limit":  5,
-    "wersje":  [
-                   {
-                       "id":  "v1",
-                       "data":  "2026-09-25",
-                       "tytul":  "Felga 17×7.5J + śruba M14 + nasadka 17",
-                       "opis":  "Start projektu: parametryczny model felgi aluminiowej — 7 ramion zaokrąglonych R8, obręcz z rantami J, piasta z wpuszczanymi śrubami (kieszenie Ø26 × 10 mm, gniazdo kuliste R14, otwór Ø15). Dodatkowo śruba M14 z łbem HEX 17 i nasadka 17 mm. Wydruk w skali 45%: obręcz Ø204 mm (czarna) + środek (szary).",
-                       "parametry":  {
-                                         "Średnica":  "17\" (431,8 mm)",
-                                         "Szerokość":  "7.5J (190,5 mm)",
-                                         "PCD":  "5×112 mm",
-                                         "ET":  "35 mm",
-                                         "CB":  "Ø57,1 mm",
-                                         "Ramiona":  "7 (zaokrąglone R8)",
-                                         "Otwór śrub":  "Ø15 mm + gniazdo R14",
-                                         "Skala wydruku":  "45% → Ø204 mm"
-                                     },
-                       "model":  [
-                                     "obrecz.stl",
-                                     "srodek.stl",
-                                     "sruba.stl",
-                                     "nasadka.stl"
-                                 ],
-                       "img":  [
-                                   "profil.png",
-                                   "3d.png",
-                                   "scena.png",
-                                   "sruba.png"
-                               ],
-                       "zrodlo":  "zrodlo.FCStd",
-                       "czesci":  "czesci.json"
-                   }
-               ]
+  "limit": 5,
+  "wersje": [
+    {
+      "id": "v2",
+      "data": "2026-09-26",
+      "tytul": "Mechanizm napedu i badan - stanowisko testowe",
+      "opis": "Stanowisko do testow felgi: tarcza montazowa dopasowana do wydruku 45% (prowadzenie Ø25,4 i 5 otworow na PCD 50,4 - pod sruby M6), wal Ø8 w dwoch lozyskach 608, oprawy i podstawa, naped NEMA 17 przez pasek GT2 (kola 40T/20T). Os walu 115 mm nad stolem, felga Ø204 z przeswitem 4,5 mm.",
+      "parametry": {
+        "Średnica": "17\" (431.8 mm)",
+        "Szerokość": "7.5J (190.5 mm)",
+        "PCD": "5×112 mm",
+        "ET": "35 mm",
+        "CB": "Ø57.1 mm",
+        "Ramiona": "7 (R8)",
+        "Obręcz (ścianka)": "6 mm",
+        "Kieszenie śrub": "Ø26 × 10 mm",
+        "Otwór śrub": "Ø15 mm + gniazdo R14",
+        "Skala mechanizmu": "45% (tarcza Ø70, PCD 50.4)",
+        "Stanowisko": "wał Ø8, łożyska 608, NEMA 17, pasek GT2"
+      },
+      "model": [
+        "kola.stl",
+        "lozyska.stl",
+        "nasadka.stl",
+        "obrecz.stl",
+        "oprawy.stl",
+        "podstawa.stl",
+        "silnik.stl",
+        "srodek.stl",
+        "sruba.stl",
+        "tarcza.stl",
+        "wal.stl",
+        "wspornik.stl"
+      ],
+      "img": [],
+      "zrodlo": ""
+    },
+    {
+      "id": "v1",
+      "data": "2026-09-25",
+      "tytul": "Felga 17×7.5J + śruba M14 + nasadka 17",
+      "opis": "Start projektu: parametryczny model felgi aluminiowej — 7 ramion zaokrąglonych R8, obręcz z rantami J, piasta z wpuszczanymi śrubami (kieszenie Ø26 × 10 mm, gniazdo kuliste R14, otwór Ø15). Dodatkowo śruba M14 z łbem HEX 17 i nasadka 17 mm. Wydruk w skali 45%: obręcz Ø204 mm (czarna) + środek (szary).",
+      "parametry": {
+        "Średnica": "17\" (431,8 mm)",
+        "Szerokość": "7.5J (190,5 mm)",
+        "PCD": "5×112 mm",
+        "ET": "35 mm",
+        "CB": "Ø57,1 mm",
+        "Ramiona": "7 (zaokrąglone R8)",
+        "Otwór śrub": "Ø15 mm + gniazdo R14",
+        "Skala wydruku": "45% → Ø204 mm"
+      },
+      "model": [
+        "obrecz.stl",
+        "srodek.stl",
+        "sruba.stl",
+        "nasadka.stl"
+      ],
+      "img": [
+        "profil.png",
+        "3d.png",
+        "scena.png",
+        "sruba.png"
+      ],
+      "zrodlo": "zrodlo.FCStd",
+      "czesci": "czesci.json"
+    }
+  ]
 }

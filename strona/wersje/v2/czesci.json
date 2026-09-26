@@ -1,0 +1,110 @@
+[
+  {
+    "id": "obrecz",
+    "nazwa": "Obręcz felgi",
+    "plik": "obrecz.stl",
+    "step": "step/obrecz.step",
+    "grupa": "felga",
+    "kolor": "#14161a",
+    "widoczna": true
+  },
+  {
+    "id": "srodek",
+    "nazwa": "Środek felgi (piasta + ramiona)",
+    "plik": "srodek.stl",
+    "step": "step/srodek.step",
+    "grupa": "felga",
+    "kolor": "#9aa1a8",
+    "widoczna": true
+  },
+  {
+    "id": "tarcza",
+    "nazwa": "Tarcza montażowa (skala 45%)",
+    "plik": "tarcza.stl",
+    "step": "step/tarcza.step",
+    "grupa": "mechanizm",
+    "kolor": "#ffc400",
+    "widoczna": true
+  },
+  {
+    "id": "wal",
+    "nazwa": "Wał Ø8",
+    "plik": "wal.stl",
+    "step": "step/wal.step",
+    "grupa": "mechanizm",
+    "kolor": "#c9ced4",
+    "widoczna": true
+  },
+  {
+    "id": "lozyska",
+    "nazwa": "Łożyska 608 × 2",
+    "plik": "lozyska.stl",
+    "step": "step/lozyska.step",
+    "grupa": "mechanizm",
+    "kolor": "#6b7280",
+    "widoczna": true
+  },
+  {
+    "id": "oprawy",
+    "nazwa": "Oprawy łożysk",
+    "plik": "oprawy.stl",
+    "step": "step/oprawy.step",
+    "grupa": "mechanizm",
+    "kolor": "#6f7780",
+    "widoczna": true
+  },
+  {
+    "id": "podstawa",
+    "nazwa": "Podstawa stanowiska",
+    "plik": "podstawa.stl",
+    "step": "step/podstawa.step",
+    "grupa": "mechanizm",
+    "kolor": "#3b4450",
+    "widoczna": true
+  },
+  {
+    "id": "wspornik",
+    "nazwa": "Wspornik silnika (NEMA 17)",
+    "plik": "wspornik.stl",
+    "step": "step/wspornik.step",
+    "grupa": "napęd",
+    "kolor": "#4a545f",
+    "widoczna": true
+  },
+  {
+    "id": "silnik",
+    "nazwa": "Silnik NEMA 17",
+    "plik": "silnik.stl",
+    "step": "step/silnik.step",
+    "grupa": "napęd",
+    "kolor": "#2b3239",
+    "widoczna": true
+  },
+  {
+    "id": "kola",
+    "nazwa": "Koła pasowe GT2 40T + 20T",
+    "plik": "kola.stl",
+    "step": "step/kola.step",
+    "grupa": "napęd",
+    "kolor": "#b9bec3",
+    "widoczna": true
+  },
+  {
+    "id": "sruba",
+    "nazwa": "Śruba M14",
+    "plik": "sruba.stl",
+    "step": "step/sruba.step",
+    "grupa": "osprzęt",
+    "kolor": "#7d838a",
+    "widoczna": true
+  },
+  {
+    "id": "nasadka",
+    "nazwa": "Nasadka 17 mm",
+    "plik": "nasadka.stl",
+    "step": "step/nasadka.step",
+    "grupa": "osprzęt",
+    "kolor": "#b9bec3",
+    "widoczna": true
+  }
+]

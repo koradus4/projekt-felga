@@ -1,0 +1,35 @@
+{
+  "id": "v2",
+  "data": "2026-09-26",
+  "tytul": "Mechanizm napedu i badan - stanowisko testowe",
+  "opis": "Stanowisko do testow felgi: tarcza montazowa dopasowana do wydruku 45% (prowadzenie Ø25,4 i 5 otworow na PCD 50,4 - pod sruby M6), wal Ø8 w dwoch lozyskach 608, oprawy i podstawa, naped NEMA 17 przez pasek GT2 (kola 40T/20T). Os walu 115 mm nad stolem, felga Ø204 z przeswitem 4,5 mm.",
+  "parametry": {
+    "Średnica": "17\" (431.8 mm)",
+    "Szerokość": "7.5J (190.5 mm)",
+    "PCD": "5×112 mm",
+    "ET": "35 mm",
+    "CB": "Ø57.1 mm",
+    "Ramiona": "7 (R8)",
+    "Obręcz (ścianka)": "6 mm",
+    "Kieszenie śrub": "Ø26 × 10 mm",
+    "Otwór śrub": "Ø15 mm + gniazdo R14",
+    "Skala mechanizmu": "45% (tarcza Ø70, PCD 50.4)",
+    "Stanowisko": "wał Ø8, łożyska 608, NEMA 17, pasek GT2"
+  },
+  "model": [
+    "kola.stl",
+    "lozyska.stl",
+    "nasadka.stl",
+    "obrecz.stl",
+    "oprawy.stl",
+    "podstawa.stl",
+    "silnik.stl",
+    "srodek.stl",
+    "sruba.stl",
+    "tarcza.stl",
+    "wal.stl",
+    "wspornik.stl"
+  ],
+  "img": [],
+  "zrodlo": ""
+}
