@@ -33,7 +33,11 @@
         "wal.stl",
         "wspornik.stl"
       ],
-      "img": [],
+      "img": [
+        "3d.png",
+        "profil.png",
+        "drugi.png"
+      ],
       "zrodlo": ""
     },
     {
