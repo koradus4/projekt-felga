@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Warsztat — historia wersji projektu</title>
+<meta name="description" content="Historia wersji projektu Felga: felga aluminiowa, mechanizm napędu i badania — kolejne etapy prac z podglądem 3D.">
+<meta name="theme-color" content="#0f1216">
+<link rel="icon" type="image/png" href="img/ikona-192.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="warsztat">
+
+<header class="stopbar">
+  <a href="index.html" title="Książka projektu (praca końcowa)">📖</a>
+  <b>Warsztat</b>
+  <span class="badge" id="wersjaBadge">wersje…</span>
+</header>
+
+<main class="wmain">
+  <p class="hint">Historia projektu — każda wersja to kolejny etap prac (felga + mechanizm napędu/badań).
+  Najnowsza pierwsza. Kliknij kafelek, żeby zobaczyć podgląd 3D i szczegóły.</p>
+
+  <div id="os" class="os"></div>
+
+  <div class="wgrid">
+    <div class="viewer-wrap">
+      <div id="wviewer"></div>
+      <div class="viewer-ui">
+        <button id="wReset">Wyśrodkuj</button>
+        <button id="wWire">Siatka</button>
+        <button id="wSpin">Obrót: ON</button>
+        <button id="wPorownaj">Porównaj z poprzednią</button>
+      </div>
+    </div>
+
+    <div class="wcard">
+      <h3 id="wTytul">—</h3>
+      <p class="wdate" id="wData">—</p>
+      <p id="wOpis">—</p>
+
+      <h4>Parametry</h4>
+      <table class="tbl small" id="wParams"></table>
+
+      <h4>Pliki do pobrania</h4>
+      <p class="dl" id="wPliki"></p>
+
+      <h4>Galeria wersji</h4>
+      <div class="gal mini" id="wGal"></div>
+
+      <p class="hint" style="margin-top:14px">🤖 Asystent „Zapytaj inżyniera" pojawi się w kolejnym etapie.
+      Do tego czasu pytaj w <a href="nauka.html">Stacji Nauki</a> (przedmioty zawodowe).</p>
+    </div>
+  </div>
+</main>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "./vendor/three.module.js",
+    "three/addons/": "./vendor/addons/"
+  }
+}
+</script>
+<script src="warsztat.js"></script>
+</body>
+</html>

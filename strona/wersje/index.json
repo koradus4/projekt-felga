@@ -1,0 +1,24 @@
+{
+  "limit": 5,
+  "wersje": [
+    {
+      "id": "v1",
+      "data": "2026-09-25",
+      "tytul": "Felga 17×7.5J + śruba M14 + nasadka 17",
+      "opis": "Start projektu: parametryczny model felgi aluminiowej — 7 ramion zaokrąglonych R8, obręcz z rantami J, piasta z wpuszczanymi śrubami (kieszenie Ø26 × 10 mm, gniazdo kuliste R14, otwór Ø15). Dodatkowo śruba M14 z łbem HEX 17 i nasadka 17 mm. Wydruk w skali 45%: obręcz Ø204 mm (czarna) + środek (szary).",
+      "parametry": {
+        "Średnica": "17\" (431,8 mm)",
+        "Szerokość": "7.5J (190,5 mm)",
+        "PCD": "5×112 mm",
+        "ET": "35 mm",
+        "CB": "Ø57,1 mm",
+        "Ramiona": "7 (zaokrąglone R8)",
+        "Otwór śrub": "Ø15 mm + gniazdo R14",
+        "Skala wydruku": "45% → Ø204 mm"
+      },
+      "model": ["obrecz.stl", "srodek.stl", "sruba.stl", "nasadka.stl"],
+      "img": ["profil.png", "3d.png", "scena.png", "sruba.png"],
+      "zrodlo": "zrodlo.FCStd"
+    }
+  ]
+}
