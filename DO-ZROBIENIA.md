@@ -28,8 +28,9 @@ _Ostatnia aktualizacja: 24.09.2026 · autor: Kamil Borkowski · opiekun: Konrad 
 - [ ] (opcja) tryb egzaminu z zapisem wyników, eksport rozmów do PDF
 
 ## 🔑 WAŻNE (bezpieczeństwo / dostępy)
-- Klucz **DeepSeek** — w Render: usługa `stacja-nauki-api` → Environment → `DEEPSEEK_API_KEY`
-- Klucz **Render API** (`rnd_...`) — po zakończeniu prac zrobić **Revoke** (Account Settings → API Keys)
+- Klucz **DeepSeek** — w Render: usługa `stacja-nauki-api` → Environment → `DEEPSEEK_API_KEY` (sprawny: 25.09.2026 ✓)
+- Klucz **Render API** (`rnd_...`) — nowy z 25.09.2026 ✓; po zakończeniu prac zrobić **Revoke** (Account Settings → API Keys)
+- **Auto-deploy: WŁĄCZONY** dla obu usług ✓ (`projekt-felga` + `stacja-nauki-api`) — po `git push` publikują się same
 - Konto Render: `klif_kryspin` · usługi: `projekt-felga` (static) + `stacja-nauki-api` (node, free)
 - Podgląd lokalny: `strona\serve.py` (port 8000) + `serwer\server.js` (port 8787, wymaga klucza w zmiennej)
 
